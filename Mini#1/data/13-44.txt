@@ -1,0 +1,71 @@
+Sample Type: General Medicine
+
+					Sample Name: Gen Med Consult - 7
+				
+
+					
+					Description: 
+					Patient with gradual onset of shortness of breath, diffuse pain, lower extremity weakness, guaiac position dark stools, history of mesenteric ischemia, colon cancer status post partial colectomy, and with increased INR.
+(Medical Transcription Sample Report)
+
+
+			
+			
+				CHIEF COMPLAINT: Shortness of breath. 
+
+HISTORY OF PRESENT ILLNESS:   Ms. M. is a 77-year-old female with a past medical history is significant for microcell1 carcinoma of the right buttock, status post excision with negative sentinel node, who subsequently developed known bone metastases to T4 and bilateral femurs and is status post XRT earlier this year.  Colon cancer, status post partial colectomy in 1991.  Chronic mesenteric ischemia, status post SMA bypass in 2002. The patient presents with shortness of breath and states that the symptoms started a week ago when she began to have shortness of breath with increasing pain. The pain is difficult to characterize but localizes to the right chest, worse with inspiration; however, the patient has complaints of pain over the abdomen and lower extremity. In addition, the patient complains of new bumps in her skin on both her head and abdomen. The patient complains of malodorous urine, abdominal distension, and dark stools times two yesterday and one today with worsening low back pain and worsening right leg weakness and decreased appetite and right leg foot swelling. The patient is unable to characterize any of these problems further. 
+
+PAST MEDICAL HISTORY: 
+1. Atrial fibrillation with pacer in place on chronic Coumadin. 
+2. Hypertension. 
+3. On chronic renal insufficiency. 
+4. Urinary incontinence. 
+5. Colon cancer as described in history of present illness. 
+6. Microcell carcinoma as described in history of present illness. 
+7. Chronic mesenteric ischemia as described in history of present illness. 
+
+MEDICATIONS: 
+1. Norvasc. 
+2. Atenolol 75 mg q.d. 
+3. Clonidine. 
+4. Furosemide.
+
+ALLERGIES: Codeine, Procardia, sulfur, and quinine.
+
+REVIEW OF SYSTEMS:  Not dictated. 
+
+FAMILY HISTORY: There is no family history of malignancy. 
+
+PERSONAL/SOCIAL HISTORY: The patient is a nonsmoker and a nondrinker. No IV drug use. 
+
+ED COURSE: The patient is afebrile. Blood pressure is 120/70. Pulse is 62. Oxygen saturation is 96% on 2 L. Workup included rectal examination which is grossly guaiac positive with dark brown stool. NG lavage was also done which was initially slightly pink but then cleared quickly. A chest x-ray was done which revealed a new right pleural effusion since December 2003. 
+
+PHYSICAL EXAMINATION :
+VITAL SIGNS: On the floor, the patient was afebrile. Blood pressure is 130/80. Pulse is 70. Oxygen saturation is 98% on 2 L. 
+GENERAL APPEARANCE: She is alert and oriented, deferring most of her history to her daughters. 
+HEENT: Dry mucous membranes. Pupils were equal, round and reactive to light. Extraocular movements are intact. No scleral icterus. 
+CARDIOVASCULAR: Regular rate and rhythm with no murmurs, rubs, or gallops. 
+CHEST: Dullness and decreased breath sounds in the right base through mid lung field, otherwise clear to auscultation. 
+ABDOMEN: Normoactive bowel sounds. Soft, nontender, and nondistended. No bruits. The patient has multiple small subcutaneous rubbery masses or nodules on her abdomen that appear to be slightly violaceous. 
+EXTREMITIES: Lower extremities are cool, trace DP pulses palpable. No skin changes or necrosis of her extremities. 
+LABORATORY: Laboratories are remarkable for a sodium of 132 with potassium, BUN, and creatinine all hemolyzed. Bicarbonate is 23. The patient has a slightly elevated lactic acid at 2.8. Troponin is 0.5 which is elevated from her previous of less than 0.3. INR is elevated at 3.87. The patient has normal liver function tests, normal white blood cell count, hematocrit of 37, and platelet count 325,000. 
+
+IMAGING: Chest x-ray showed right pleural effusion, prominent aortic knob, and no other opacifications, unchanged since December 2003. Electrocardiogram showed a pace rhythm. Lower extremity Dopplers are negative for deep venous thrombosis. Bone scan from February 2003 showed multiple increases in uptake and the right humerus an bilateral distal femurs. 
+
+ASSESSMENT AND PLAN: The patient is a 77-year-old female who presents with gradual onset of shortness of breath, diffuse pain, lower extremity weakness, guaiac positive dark stools in the setting of metastatic microcell tumor, history of mesenteric ischemia, history of colon cancer status post partial colectomy, and with increased INR. 
+1. SHORTNESS OF BREATH: Most likely secondary to pleural effusion although cannot rule out cardiac ischemia. Consider PPD unlikely with INR of 3.5. There is no evidence for pneumonia. Effusion most likely malignant. Other causes include radiation-induced and consider congestive heart failure-pneumonia-related, unlikely. I will check a decubitus film. I will do thoracentesis when INR is less than 2 to 1.5; however, I feel INR will likely continue to rise as the patient has been taking Coumadin. 
+2. GUAIAC POSITIVE STOOLS: Concerning for mucosal break with INR of 3.35. Differential diagnosis includes metastatic disease, local recurrence of colon cancer, or ischemia. At this point, I doubt benefit of aggressive workup; however, I will evaluate for ischemia and mass lesion and possible obstruction with abdominal CT. Unfortunately, I will not be able to use IV contrast due to the patient's chronic renal insufficiency. We will do serial guaiac stools, CT of abdomen, pelvis, serial lactic acids, and check arterial blood gases to evaluate acidosis, and hold Coumadin. 
+
+3. WORSENING LOW BACK PAIN AND RIGHT LOWER EXTREMITY PAIN PLUS SWELLING: This is concerning from a metastatic disease and impending core compression versus clot versus worsening metastatic disease. Lower extremity Dopplers being negative is reassuring. I will check CT of lumbar spine as unable to get magnetic resonance scan as it is contraindicated with pacer. The patient will also not be able to get any IV contrast with the CT as he has chronic renal insufficiency. 
+4. INCREASED TROPONIN: This is concerning given the history of hypertension vasculopathy. I will consider demand-related ischemia most likely (anemia (?), increased pulmonary pressures (?)). Electrocardiogram is difficult to interpret. I will check serial electrocardiograms and serial troponins. 
+5. SKIN NODULES: Most concerning for metastatic disease. Dermatology consult in a.m. and will likely request biopsy of these nodules. 
+6. MALODOROUS URINE: I will consider urinary tract infection. I will check urinalysis. 
+7. INCREASED INR: I will hold the patient's Coumadin for now and monitor daily INRs and monitor for signs of bleed. 
+8. PROPHYLAXIS: I will not anticoagulate as the patient is already super therapeutic (will remain on Neupogen CPI for symptoms.
+
+
+
+				
+
+				Keywords: general medicine, shortness of breath, guaiac positive stools, troponin, malodorous urine, increased inr, status post partial colectomy, microcell carcinoma, renal insufficiency, pleural effusion, mesenteric ischemia, metastatic disease, colon cancer, microcell, ischemia, 
+				

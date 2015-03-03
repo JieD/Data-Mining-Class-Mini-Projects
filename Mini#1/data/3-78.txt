@@ -1,0 +1,32 @@
+Sample Type: Cardiovascular / Pulmonary
+
+					Sample Name: Pulmonary Function Test - 2
+				
+
+					
+					Description: 
+					Pulmonary Function Test to evaluate dyspnea.
+(Medical Transcription Sample Report)
+
+
+			
+			
+				HISTORY:  Smoking history zero.
+
+INDICATION:  Dyspnea with walking less than 100 yards.
+
+PROCEDURE:  FVC was 59%.  FEV1 was 61%.  FEV1/FVC ratio was 72%. The predicted was 70%.  The FEF 25/75% was 45%, improved from 1.41 to 2.04 with bronchodilator, which represents a 45% improvement.  SVC was 69%. Inspiratory capacity was 71%.  Expiratory residual volume was 61%.  The TGV was 94%.  Residual volume was 113% of its predicted.  Total lung capacity was 83%.  Diffusion capacity was diminished.
+
+IMPRESSION:
+1.  Moderate restrictive lung disease.
+2.  Some reversible small airway obstruction with improvement with bronchodilator.
+3.  Diffusion capacity is diminished, which might indicate extrapulmonary restrictive lung disease.
+4.  Flow volume loop was consistent with the above and no upper airway obstruction.
+
+
+
+
+				
+
+				Keywords: cardiovascular / pulmonary, pulmonary function test, pft, smoking history, dyspnea, walking, fvc, fev1, fev1/fvc ratio, fef, bronchodilator, svc, residual volume, diffusion capacity, restrictive lung disease, airway obstruction, extrapulmonary, flow volume loop, 
+				
