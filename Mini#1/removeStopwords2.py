@@ -13,7 +13,6 @@
 
 import sys
 import re
-import string
 
 def main():
     stopwords = re.compile(r'\b(a|an|and|are|as|at|be|by|for|from|has|he|in|is|it|its|of|on|that|the|to|was|were|will|with)\b', re.I)
@@ -32,8 +31,7 @@ def main():
         line = in_file.readline()
         if line == '': # EOF
             break
-        # strip punctuation
-        line = line.translate(string.maketrans("",""), string.punctuation)
+
         filtered_sent = re.sub(stopwords, '', line)
         filtered_sents.append(filtered_sent)
 

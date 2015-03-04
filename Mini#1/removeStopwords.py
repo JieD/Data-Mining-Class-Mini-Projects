@@ -18,6 +18,7 @@ def main():
     stopwords = ['a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it', 'its',
                  'of', 'on', 'that', 'the', 'to', 'was', 'were', 'will', 'with']
 
+    # load command line arguments
     if len(sys.argv) is not 3:
         print 'incorrect arguments\nneed: input_file.txt output_file.txt'
         sys.exit(2)
@@ -35,8 +36,8 @@ def main():
         # do not use word_tokenize from nltk, punctuation is a problem.
         # words = word_tokenize(line)
 
-        # strip punctuation
-        line = line.translate(string.maketrans("",""), string.punctuation)
+        # strip punctuation (no need)
+        # line = line.translate(string.maketrans("",""), string.punctuation)
         words = line.split()
         filtered_words = [w for w in words if w.lower() not in stopwords]
         filtered_sent = ' '.join(filtered_words)
@@ -49,4 +50,4 @@ def main():
     out_file.close()
 
 if __name__ == "__main__":
-  main()
+    main()

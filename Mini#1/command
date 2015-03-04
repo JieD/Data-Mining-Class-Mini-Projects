@@ -1,2 +1,6 @@
-ls
-pwd
+find data/ -type f > results/report_file_names.txt
+python extract_sentences_containing_family_member.py results/report_file_names.txt results/family_history_sentences.txt
+python removeStopwords.py results/family_history_sentences.txt results/stopwords_removed_sentences.txt
+python prepare_bags_of_words.py results/stopwords_removed_sentences.txt results/bag_of_words_sentences.txt
+apriori\ 2/apriori/src/apriori -s1.57m2n2 results/bag_of_words_sentences.txt results/primitive_word_associations.txt
+python span_filter_associations.py results/primitive_word_associations.txt results/family_history_sentences.txt

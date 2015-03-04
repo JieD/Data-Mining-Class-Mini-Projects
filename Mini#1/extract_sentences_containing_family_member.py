@@ -26,6 +26,8 @@
 import sys
 import re
 import nltk
+import string
+from nltk.tokenize import word_tokenize
 
 def main():
 
@@ -80,7 +82,15 @@ def main():
     for sent in sentences:
       if familynames.search(sent) is not None:
           contain_family_member = True
-          familysentences.append(sent.replace('\n',''))
+
+          # clean sentence - lowercase and strip punctuation
+          sent = sent.lower()
+          words = word_tokenize(sent)
+          splitted_sent = ' '.join(words)
+          no_punctuation_sent = splitted_sent.translate(string.maketrans("",""), string.punctuation)
+          clean_sent = re.sub(re.compile(r'\bs\b'), '', no_punctuation_sent)
+
+          familysentences.append(clean_sent.replace('\n',''))
 
     if contain_family_member: familysentences.append(file) # save file name
 
