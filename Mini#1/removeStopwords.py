@@ -33,11 +33,6 @@ def main():
         line = in_file.readline()
         if line == '': # EOF
             break
-        # do not use word_tokenize from nltk, punctuation is a problem.
-        # words = word_tokenize(line)
-
-        # strip punctuation (no need)
-        # line = line.translate(string.maketrans("",""), string.punctuation)
         words = line.split()
         filtered_words = [w for w in words if w.lower() not in stopwords]
         filtered_sent = ' '.join(filtered_words)

@@ -83,7 +83,7 @@ def main():
       if familynames.search(sent) is not None:
           contain_family_member = True
 
-          # clean sentence - lowercase and strip punctuation
+          # clean sentence - lowercase, strip punctuation and 's (e.g. mother's -> mother)
           sent = sent.lower()
           words = word_tokenize(sent)
           splitted_sent = ' '.join(words)
