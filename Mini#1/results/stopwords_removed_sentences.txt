@@ -63,7 +63,7 @@ far cancer two cousins had breast cancer
 far diabetes father grandfather had type ii diabetes
 son type i diabetes struggling moment
 data//13-17.txt
-mother would concerned about possibility coronary artery disease given patient’ underlying risk factors
+mother would concerned about possibility coronary artery disease given patient underlying risk factors
 data//13-19.txt
 family history father passed away 81 mother multiple myeloma 83
 data//13-20.txt
@@ -105,7 +105,7 @@ family history mother 61 years old brother 39 years old both alive well
 father died 48 colon cancer questionable pancreatic cancer
 one paternal uncle died 32 colon cancer bile duct cancer
 one paternal uncle had colon cancer his 40s
-thirty cancers noted father’ side family many colon two women had breast cancer
+thirty cancers noted father side family many colon two women had breast cancer
 data//13-34.txt
 dnr status i have ad discussion patient daughter who requests patient not receive cpr or intubation if her clinical condition or patient does not respond above therapy
 data//13-35.txt
@@ -141,7 +141,7 @@ apparently his brother had similar symptoms
 they had eaten some chicken then ate some more next day i could not quite understand what problem because there little bit language barrier although dad trying very hard explain me what had happened
 but any way after his brother got done eating chicken they both felt bad have continued feel bad
 data//13-57.txt
-her daughter says they do check periodically similar today’ reading
+her daughter says they do check periodically similar today reading
 she also thinks since she been lexapro she somewhat tremor her basically whole body least upper body including torso arms had all daughters who i not noticed speak certainly difficult tell her today she much tremor
 she no acute distress accompanied daughter
 daughter mentioned here today she thinks her mom doing pretty well especially given she turning 90 here later this month i would tend agree
@@ -153,7 +153,7 @@ data//13-64.txt
 family history mother history coronary artery disease
 further inpatient management this patient provided dr r patient status discussed her daughter her husband
 data//13-69.txt
-medical transcription sample report subjective this 46yearold white male down’ syndrome presents his mother followup hypothyroidism well onychomycosis
+medical transcription sample report subjective this 46yearold white male down syndrome presents his mother followup hypothyroidism well onychomycosis
 his mother notes although does not like take medications taking encouragement
 data//13-7.txt
 daughter states patient life care center she believes this started this morning
@@ -290,7 +290,7 @@ sunday she went pick up her sister her sister home when her sister not there bec
 she later called sister asked her if she sister had overslept
 meds none fhx father died mi mother had dm type ii
 data//19-35.txt
-condition affects patient’ brother maternal grandfather
+condition affects patient brother maternal grandfather
 data//19-39.txt
 fhx mother alive ho htn stroke
 father died motor vehicle accident age 40 years
@@ -449,7 +449,7 @@ patient accompanied mother
 mother concerned about child red matted eye not walking completely alone yet
 family history patient admits family history cancer associated maternal aunt hypertension associated paternal grandfather
 data//26-2.txt
-patient’ mom tanzania
+patient mom tanzania
 discussed condition treatment mom
 data//26-3.txt
 medical transcription sample report presentation patient 13 years old comes your office his mother complaining about severe ear pain
@@ -778,7 +778,7 @@ family history patient admits family history rheumatoid arthritis associated mat
 data//31-3.txt
 she walks her daughter school back home each day which takes 20 minutes each way
 data//32-12.txt
-medical transcription sample report subjective this 46yearold white male down’ syndrome presents his mother followup hypothyroidism well onychomycosis
+medical transcription sample report subjective this 46yearold white male down syndrome presents his mother followup hypothyroidism well onychomycosis
 his mother notes although does not like take medications taking encouragement
 data//32-16.txt
 sample type soap chart notes sample name fifth disease soap description fifth disease sinusitis medical transcription sample report subjective grandfather brings patient today because headaches mostly her face
@@ -795,7 +795,7 @@ apparently his brother had similar symptoms
 they had eaten some chicken then ate some more next day i could not quite understand what problem because there little bit language barrier although dad trying very hard explain me what had happened
 but any way after his brother got done eating chicken they both felt bad have continued feel bad
 data//32-27.txt
-her daughter says they do check periodically similar today’ reading
+her daughter says they do check periodically similar today reading
 she also thinks since she been lexapro she somewhat tremor her basically whole body least upper body including torso arms had all daughters who i not noticed speak certainly difficult tell her today she much tremor
 she no acute distress accompanied daughter
 daughter mentioned here today she thinks her mom doing pretty well especially given she turning 90 here later this month i would tend agree
@@ -1067,7 +1067,7 @@ far cancer two cousins had breast cancer
 far diabetes father grandfather had type ii diabetes
 son type i diabetes struggling moment
 data//5-46.txt
-mother would concerned about possibility coronary artery disease given patient’ underlying risk factors
+mother would concerned about possibility coronary artery disease given patient underlying risk factors
 data//5-48.txt
 family history father passed away 81 mother multiple myeloma 83
 data//5-49.txt
@@ -1109,7 +1109,7 @@ family history mother 61 years old brother 39 years old both alive well
 father died 48 colon cancer questionable pancreatic cancer
 one paternal uncle died 32 colon cancer bile duct cancer
 one paternal uncle had colon cancer his 40s
-thirty cancers noted father’ side family many colon two women had breast cancer
+thirty cancers noted father side family many colon two women had breast cancer
 data//5-63.txt
 dnr status i have ad discussion patient daughter who requests patient not receive cpr or intubation if her clinical condition or patient does not respond above therapy
 data//5-64.txt
@@ -1175,11 +1175,11 @@ data//5-96.txt
 family history mother died cancer unknown type
 dad died mi
 data//5-97.txt
-condition affects patient’ brother maternal grandfather
+condition affects patient brother maternal grandfather
 data//5-98.txt
 family history patient admits family history anxiety stress disorder associated mother
 data//7-2.txt
-patient’ mom tanzania
+patient mom tanzania
 discussed condition treatment mom
 data//7-3.txt
 medical transcription sample report subjective his brother although vegetarian elevated cholesterol medication lower

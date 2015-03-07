@@ -83,12 +83,14 @@ def main():
       if familynames.search(sent) is not None:
           contain_family_member = True
 
-          # clean sentence - lowercase, strip punctuation and 's (e.g. mother's -> mother)
+          # clean sentence - lowercase, strip punctuation and 's (e.g. mother's -> mother), non-ASCII characters
           sent = sent.lower()
           words = word_tokenize(sent)
           splitted_sent = ' '.join(words)
           no_punctuation_sent = splitted_sent.translate(string.maketrans("",""), string.punctuation)
           clean_sent = re.sub(re.compile(r'\bs\b'), '', no_punctuation_sent)
+          #remove non-ASCII characters
+          clean_sent = re.sub(r'[^\x00-\x7F]+','', clean_sent)
 
           familysentences.append(clean_sent.replace('\n',''))
 

@@ -63,7 +63,7 @@ as far as cancer two cousins had breast cancer
 as far as diabetes father and grandfather had type ii diabetes 
 son has type i diabetes and is struggling with that at the moment 
 data//13-17.txt
-mother would be concerned about the possibility of coronary artery disease given the patient’ underlying risk factors 
+mother would be concerned about the possibility of coronary artery disease given the patient underlying risk factors 
 data//13-19.txt
 family history  father passed away at 81  mother of multiple myeloma at 83 
 data//13-20.txt
@@ -105,7 +105,7 @@ family history  mother is 61 years old and brother is 39 years old  both alive a
 father died at 48 of colon cancer and questionable pancreatic cancer 
 one paternal uncle died at 32 of colon cancer and bile duct cancer 
 one paternal uncle had colon cancer in his 40s 
-thirty cancers are noted on the father’ side of the family  many are colon  two women had breast cancer 
+thirty cancers are noted on the father side of the family  many are colon  two women had breast cancer 
 data//13-34.txt
 dnr status  i have ad a discussion with the patient  daughter  who requests the patient not receive cpr or intubation if her clinical condition or of the patient does not respond to the above therapy 
 data//13-35.txt
@@ -141,7 +141,7 @@ apparently  his brother had similar symptoms
 they had eaten some chicken and then ate some more of it the next day  and i could not quite understand what the problem was because there is a little bit of language barrier  although dad was trying very hard to explain to me what had happened 
 but any way  after he and his brother got done eating with chicken  they both felt bad and have continued to feel bad 
 data//13-57.txt
-her daughter says that they do check it periodically and it is similar to today’ reading 
+her daughter says that they do check it periodically and it is similar to today reading 
 she also thinks since she has been on the lexapro  she has somewhat of a tremor of her basically whole body at least upper body including the torso and arms and had all of the daughters who i not noticed to speak of and it is certainly difficult to tell her today that she has much tremor 
 she is in no acute distress  accompanied by daughter 
 daughter mentioned here today that she thinks her mom is doing pretty well  especially given that she is turning 90 here later this month and i would tend to agree with that 
@@ -153,7 +153,7 @@ data//13-64.txt
 family history  mother with history of coronary artery disease 
 further inpatient management for this patient will be provided by dr r the patient  status was discussed with her daughter and her husband 
 data//13-69.txt
- medical transcription sample report  subjective  this 46yearold white male with down’ syndrome presents with his mother for followup of hypothyroidism  as well as onychomycosis 
+ medical transcription sample report  subjective  this 46yearold white male with down syndrome presents with his mother for followup of hypothyroidism  as well as onychomycosis 
 his mother notes that although he does not like to take the medications  he is taking it with encouragement 
 data//13-7.txt
 the daughter states the patient is in the life care center  and she believes this started this morning 
@@ -290,7 +290,7 @@ that sunday she went to pick up her sister at her sister  home and when her sist
 she later called the sister and asked her if she  sister  had overslept 
 meds  none fhx  father died of an mi  mother had dm type ii 
 data//19-35.txt
-the condition affects the patient’ brother and maternal grandfather 
+the condition affects the patient brother and maternal grandfather 
 data//19-39.txt
 fhx  mother is alive and has a ho htn and stroke 
 father died in motor vehicle accident at age 40 years 
@@ -449,7 +449,7 @@ patient was accompanied by mother
 mother is concerned about child  red  matted eye and not walking completely alone yet 
 family history  patient admits a family history of cancer associated with maternal aunt  hypertension associated with paternal grandfather 
 data//26-2.txt
-the patient’ mom is from tanzania 
+the patient mom is from tanzania 
 discussed condition and treatment with mom 
 data//26-3.txt
  medical transcription sample report  presentation  patient  13 years old  comes to your office with his mother complaining about severe ear pain 
@@ -778,7 +778,7 @@ family history  patient admits a family history of rheumatoid arthritis associat
 data//31-3.txt
 she walks her daughter to school and back home each day which takes 20 minutes each way 
 data//32-12.txt
- medical transcription sample report  subjective  this 46yearold white male with down’ syndrome presents with his mother for followup of hypothyroidism  as well as onychomycosis 
+ medical transcription sample report  subjective  this 46yearold white male with down syndrome presents with his mother for followup of hypothyroidism  as well as onychomycosis 
 his mother notes that although he does not like to take the medications  he is taking it with encouragement 
 data//32-16.txt
 sample type  soap  chart notes sample name  fifth disease  soap description  fifth disease with sinusitis  medical transcription sample report  subjective  grandfather brings the patient in today because of headaches  mostly in her face 
@@ -795,7 +795,7 @@ apparently  his brother had similar symptoms
 they had eaten some chicken and then ate some more of it the next day  and i could not quite understand what the problem was because there is a little bit of language barrier  although dad was trying very hard to explain to me what had happened 
 but any way  after he and his brother got done eating with chicken  they both felt bad and have continued to feel bad 
 data//32-27.txt
-her daughter says that they do check it periodically and it is similar to today’ reading 
+her daughter says that they do check it periodically and it is similar to today reading 
 she also thinks since she has been on the lexapro  she has somewhat of a tremor of her basically whole body at least upper body including the torso and arms and had all of the daughters who i not noticed to speak of and it is certainly difficult to tell her today that she has much tremor 
 she is in no acute distress  accompanied by daughter 
 daughter mentioned here today that she thinks her mom is doing pretty well  especially given that she is turning 90 here later this month and i would tend to agree with that 
@@ -1067,7 +1067,7 @@ as far as cancer two cousins had breast cancer
 as far as diabetes father and grandfather had type ii diabetes 
 son has type i diabetes and is struggling with that at the moment 
 data//5-46.txt
-mother would be concerned about the possibility of coronary artery disease given the patient’ underlying risk factors 
+mother would be concerned about the possibility of coronary artery disease given the patient underlying risk factors 
 data//5-48.txt
 family history  father passed away at 81  mother of multiple myeloma at 83 
 data//5-49.txt
@@ -1109,7 +1109,7 @@ family history  mother is 61 years old and brother is 39 years old  both alive a
 father died at 48 of colon cancer and questionable pancreatic cancer 
 one paternal uncle died at 32 of colon cancer and bile duct cancer 
 one paternal uncle had colon cancer in his 40s 
-thirty cancers are noted on the father’ side of the family  many are colon  two women had breast cancer 
+thirty cancers are noted on the father side of the family  many are colon  two women had breast cancer 
 data//5-63.txt
 dnr status  i have ad a discussion with the patient  daughter  who requests the patient not receive cpr or intubation if her clinical condition or of the patient does not respond to the above therapy 
 data//5-64.txt
@@ -1175,11 +1175,11 @@ data//5-96.txt
 family history  mother died of cancer  unknown type 
 dad died of an mi 
 data//5-97.txt
-the condition affects the patient’ brother and maternal grandfather 
+the condition affects the patient brother and maternal grandfather 
 data//5-98.txt
 family history  patient admits a family history of anxiety  stress disorder associated with mother 
 data//7-2.txt
-the patient’ mom is from tanzania 
+the patient mom is from tanzania 
 discussed condition and treatment with mom 
 data//7-3.txt
  medical transcription sample report  subjective  his brother  although he is a vegetarian  has elevated cholesterol and he is on medication to lower it 
