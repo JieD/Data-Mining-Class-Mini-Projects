@@ -48,7 +48,6 @@ def main():
         #    out_file.write('\n')
         #    break
             #sentence = in_file.readline()
-
     out_file.close()
 
 
