@@ -1,7 +1,7 @@
 ########################################################################################################################
 #
 # This script prepare the sentences to be applied with association mining algorithm.
-# 1. Transform each sentence as a bag of words
+# 1. Transform each sentence as a bag of words, discard report information
 #    Note: no need to remove duplicate words
 # 2. Write each bag of words as one line to the output
 #
@@ -40,18 +40,9 @@ def main():
         sentence = in_file.readline()
         if sentence == '':
             break
-        # write all sentences belonging to the same report to one line
-        # while 1:
-        #sentence = sentence.replace('\n', ' ').replace('\r', '') # remove newline
-        # skip report name line
         if len(sentence.split()) > 1:
             out_file.write(sentence)
-        #else: # This line is the report information. It marks reading a new report.
-        #    out_file.write('\n')
-        #    break
-            #sentence = in_file.readline()
     out_file.close()
-
 
 if __name__ == "__main__":
     main()
