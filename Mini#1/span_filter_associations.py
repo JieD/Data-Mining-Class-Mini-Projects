@@ -1,8 +1,7 @@
 #######################################################################################
 # This script removes word associations by apply word span filter k = 3, 5, 10.
 #
-# For each word association, count the number of original sentences that contain
-# this association. Filter the associations by the word span, k = 3, 5, 10.
+# Filter each word association by the word span, k = 3, 5, 10.
 # Only keep the associations that meet the span requirement with more than 60% support.
 # (Out of all the original sentences that contain a word association, 60% of them also
 #  meet the span requirement)
