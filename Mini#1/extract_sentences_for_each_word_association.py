@@ -86,7 +86,7 @@ def main():
 
         if file_count >= MIN_SUP:
             word_association_file.write(line)
-            word_association_sentences_file.write(line)
+            word_association_sentences_file.write('\n' + line)
             for sent in containing_sentences:
                 word_association_sentences_file.write(sent + '\n')
 
@@ -111,20 +111,14 @@ def clean_word_association_sent(word_association_sent):
     frequency = frequency.replace('(', '').replace(')', '')
     return [words, frequency]
 
+# check the sent contain the word association
 def contain_association(sent, association):
     for word in association:
         if not isContainWord(sent, word):
             return False
     return True
-    #regex1 = r'\b' + association[0] + r'\b'
-    #regex2 = r'\b' + association[1] + r'\b'
-    #pattern1 = re.compile(regex1, re.I)
-    #pattern2 = re.compile(regex2, re.I)
-    #if pattern1.search(sent) is not None:
-    #    if pattern2.search(sent) is not None:
-    #        return True
-    #return False
 
+# check whether the sentence contain the word
 def isContainWord(sent, word):
     regex = r'\b' + word + r'\b'
     pattern = re.compile(regex, re.I)
