@@ -1,4 +1,4 @@
-#######################################################################################
+########################################################################################################################
 #
 # This script prepare the sentences to be applied with association mining algorithm.
 # 1. Transform each sentence as a bag of words
@@ -14,9 +14,11 @@
 # usage: #python prepare_bags_of_words.py [input] [output]
 #
 # Call Apriori:
-# apriori\ 2/apriori/src/apriori -s1.57m2n2 bag_of_words_sentences.txt primitive_word_associations.txt
-# -s1.57 support is 1.57%, 5 / 318 = 0.01572
-#######################################################################################
+# frequent item sets
+# apriori\ 2/apriori/src/apriori -ts -s-5 -m2 results/bag_of_words_sentences.txt results/primitive_word_associations.txt
+# closed item sets
+# apriori\ 2/apriori/src/apriori -tc -s-5 -m2 results/bag_of_words_sentences.txt results/closed_word_associations.txt
+########################################################################################################################
 
 import sys
 
