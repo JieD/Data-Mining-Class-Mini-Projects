@@ -1,4 +1,4 @@
-#######################################################################################
+########################################################################################################################
 # This script removes word associations by apply word span filter k = 3, 5, 10.
 #
 # Filter each word association by the word span, k = 3, 5, 10.
@@ -7,8 +7,7 @@
 #  meet the span requirement)
 #
 # Command line arguments:
-# [input1]  - a txt file containing all the primitive word associations
-# [input2] - a text file containing all the original sentences
+# [input1]  - a txt file containing all the word associations and their containing original sentences
 # [output] - a text file to write all filtered word associations
 # input1:  primitive_word_associations.txt
 # input2: family_history_sentences.txt
@@ -16,16 +15,16 @@
 #
 # usage: #python span_filter_associations.py [input1] [input2] [output]
 #
-#######################################################################################
+#######################################################################################################################
 import sys
 import re
 
 def main():
     SPAN_LIST = [3, 5, 10]
-    OUTPUT_FILE = 'results/association_with_span_'
+    OUTPUT_FILE = 'results/word_association_with_span_'
 
-    if len(sys.argv) is not 3:
-        print 'incorrect arguments\nneed: input_file1.txt input_file2.txt'
+    if len(sys.argv) is not 2:
+        print 'incorrect arguments\nneed: input_file.txt'
         sys.exit(2)
     else:
         input_file1 = sys.argv[1]
@@ -93,7 +92,7 @@ def check_span(sent, association, spans):
         index1 = words.index(association[0])
         index2 = words.index(association[1])
         for i in range(0, len(spans)):
-            if abs(index1 - index2) >= spans[i]:
+            if (abs(index1 - index2) + 1) >= spans[i]:
                 results[i] = True
         return results
     except ValueError: # caused by unrecognizable mark
