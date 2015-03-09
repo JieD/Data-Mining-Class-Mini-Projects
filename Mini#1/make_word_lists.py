@@ -1,19 +1,13 @@
 ########################################################################################################################
-# This script removes word associations if they span over k = 3, 5, 10 words.
+# This script create word lists for each frequent word patterns.
 #
-# Filter each word association by the word span, k = 3, 5, 10.
-# Only keep the associations that meet the span requirement with more than 60% support.
-# (Out of all the original sentences that contain a word association, 60% of them also
-#  meet the span requirement)
-# For each closed word association, store its corresponding frequent word associations with span info into dictionaries
+# For each frequent word association, make word lists by applying order and save its frequency.
 #
 # Command line arguments:
-# [input1]  - a txt file containing all the word associations and their containing original sentences
-# [input2] - a dictionary which maps closed word associations to its corresponding frequent word associations
-# input1: closed_word_association_with_sentences.txt
-# input2: dictionary.p
+# [input]  - a txt file containing all the word associations and their containing original sentences
+# input: closed_word_association_with_sentences.txt
 #
-# usage: #python span_filter_associations.py [input1] [input2]
+# usage: #python make_word_lists.py [input]
 #
 #######################################################################################################################
 import sys
@@ -21,34 +15,31 @@ import re
 import pickle
 
 def main():
-    if len(sys.argv) is not 3:
-        print 'incorrect arguments\nneed: input_file1.txt input_file2.txt'
+    if len(sys.argv) is not 2:
+        print 'incorrect arguments\nneed: input_file.txt'
         sys.exit(2)
     else:
         input_file1 = sys.argv[1]
-        input_file2 = sys.argv[2]
 
     association_file = open(input_file1, 'r')
-    dictionary = pickle.load(open(input_file2, "rb"))
-    SPAN_LIST = [3, 5, 10]
+    dictionary_with_span3 = pickle.load(open('results/dictionary_with_span_3.p', "rb"))
+    dictionary_with_span5 = pickle.load(open('results/dictionary_with_span_5.p', "rb"))
+    dictionary_with_span10 = pickle.load(open('results/dictionary_with_span_10.p', "rb"))
+    dictionaries = [dictionary_with_span3, dictionary_with_span5, dictionary_with_span10]
 
     # prepare output files
-    dictionary_with_span = [{}, {}, {}] # store span filtered dictionaries
-    dictionary_names = []
-    loop_count = len(SPAN_LIST)
+    out = []
+    out_file_names = ['results/word_lists_3.txt', 'results/word_lists_5.txt', 'results/word_lists_10.txt']
+    loop_count = len(out_file_names)
     for i in range(0, loop_count):
-        dictionary_names.append('results/dictionary_with_span_' + str(SPAN_LIST[i]) + '.p')
+        out.append(open(out_file_names[i], 'w'))
 
-    #out1 = open('results/association_with_span_3.txt', 'w')
-    #out2 = open('results/association_with_span_5.txt', 'w')
-    #out3 = open('results/association_with_span_10.txt', 'w')
-    #out = [out1, out2, out3]
-
+    # for each closed word association, load its frequent word associations from dictionaries.
+    # mine each frequent word association for its word lists and frequency
     while 1:
         line = association_file.readline()
         if line == '': # EOF
             for i in range(0, loop_count):
-                pickle.dump(dictionary_with_span[i], open(dictionary_names[i], "wb"))
                 out[i].close()
             break
         if line == '\n':
@@ -58,52 +49,75 @@ def main():
         closed_word_association = line.split()
         frequency = int(closed_word_association.pop()) # remove support value
         key = ' '.join(closed_word_association)
-        frequent_word_associations = dictionary[key]
-        filtered_frequent_word_associations = [[], [], []] # to store frequent word associations for each word span
+        word_associations_with_spans = [[], [], []]
 
+        # load frequent word associations from all dictionaries
+        for i in range(0, loop_count):
+            if dictionaries[i].has_key(key):
+                word_associations_with_spans[i] = dictionaries[i][key]
+
+        # utilize superset and subset properties
+        # e.g. the set of word associations with span 5 should be superset of the set of word associations with span 3
+        for i in range(loop_count - 1, 0, -1):
+            for word_association in word_associations_with_spans[i-1]:
+                word_associations_with_spans[i].remove(word_association)
+
+        all_word_lists = [[], [], []]
         # read all containing sentences
         sents = []
-        for i in range (0, frequency):
+        for i in range(0, frequency):
             sents.append(association_file.readline())
 
-        # apply word filters to all corresponding frequent word associations
-        for word_association in frequent_word_associations:
-            span_counts = [0, 0, 0]
-            # check span
-            for sent in sents:
-                results = check_span(word_association, sent, SPAN_LIST)
-                # keep word associations that meet word span requirements
-                for i in range (0, loop_count):
-                    if results[i]: span_counts[i] += 1
-            for i in range (0, loop_count):
-                if (span_counts[i] * 1.0/frequency) >= 0.6:
-                    filtered_frequent_word_associations[i].append(word_association)
-                    #out[i].write(' '.join(word_association) + '\n')
-
-        # save to dictionaries
+        # find all word lists and their frequencies for all word associations with all spans
         for i in range (0, loop_count):
-            if len(filtered_frequent_word_associations[i]) > 0:
-                dictionary_with_span[i][key] = filtered_frequent_word_associations[i]
+            word_associations = word_associations_with_spans[i]
 
+            # find all word lists and frequencies for all word associations with a specific span
+            for association in word_associations:
+                frequency_dic = {}
 
-def check_span(association, sent, spans):
-    results = [False, False, False]
+                # for each word association, find its word lists and frequencies in all containing sentences
+                for sent in sents:
+                    word_list = find_word_list(association, sent)
+                    if frequency_dic.has_key(word_list):
+                        frequency_dic[word_list] += 1
+                    else:
+                        frequency_dic[word_list] = 1
+
+                all_word_lists[i].append(save_word_list_dic(frequency_dic))
+
+        for i in range(1, loop_count):
+            all_word_lists[i].extend(all_word_lists[i - 1])
+
+        for i in range(0, loop_count):
+            for word_lists in all_word_lists[i]:
+                for word_list in word_lists:
+                    out[i].write(word_list + '\n')
+
+# find the word list in sent
+def find_word_list(association, sent):
+    word_list = ''
     sent_words = sent.split()
-    indexes = find_indexes(association, sent_words)
-    min_index, max_index = min(indexes), max(indexes)
-    loop_count = len(spans)
-    for i in range(0, loop_count):
-        if len(association) <= spans[i]: # association length is not greater than spans
-            if max_index - min_index + 1 <= spans[i]:
-                results[i] = True
-    return results
+    dictionary = create_index_dict(association, sent_words)
+    indexes = dictionary.keys()
+    indexes.sort()
+    for index in indexes:
+        word_list += dictionary[index] + ' '
+    return word_list.strip()
 
-# find source words indexes in target
-def find_indexes(source, target):
-    indexes = []
+# create a dictionary of word index and its corresponding word
+def create_index_dict(source, target):
+    dictionary = {}
     for source_word in source:
-        indexes.append(target.index(source_word))
-    return indexes
+        dictionary[target.index(source_word)] = source_word
+    return dictionary
+
+def save_word_list_dic(dictionary):
+    list = []
+    keys = dictionary.keys()
+    for key in keys:
+        list.append(key + ' ' + str(dictionary[key]))
+    return list;
 
 if __name__ == "__main__":
     main()
