@@ -1,0 +1,301 @@
+age 74 5
+had cabg 5
+prostate cancer 6
+myocardial infarction 5
+age 34 5
+ho htn 2
+htn ho 3
+family history positive 5
+family positive 5
+history positive 5
+brain tumor 5
+9 age 2
+age 9 3
+alzheimer disease 6
+age 70 6
+age 59 7
+died age 59 5
+died 59 5
+vaginal delivery 6
+mother alive 6
+technique informed consent 8
+technique informed 8
+technique consent 8
+description technique 6
+age 79 9
+father age 79 5
+father 79 5
+age 40 5
+congestive heart failure 8
+congestive failure 8
+congestive heart 8
+father deceased 6
+his taking 2
+taking his 3
+siblings brother 7
+two siblings brother 3
+siblings two brother 2
+siblings two 2
+two siblings 3
+siblings brother age 5
+siblings age 5
+wellchild check 8
+consent obtained 9
+informed consent 9
+office his 4
+his office 2
+maternal aunt 5
+upper had not 2
+not had upper 3
+upper not 2
+not upper 3
+had upper 3
+upper had 2
+father htn 5
+concerned about 6
+mother complaining 5
+two sons 9
+good health 6
+age 80 9
+80 age 1
+nursing home 8
+next day 6
+similar symptoms 3
+symptoms similar 2
+32 age 2
+age 32 3
+subjective brings 6
+brings patient 6
+mother concerns 7
+coronary artery 13
+coronary artery disease 11
+artery disease 11
+artery disease father 3
+father artery disease 2
+doing well 8
+been doing well 6
+been doing 6
+general medicine 5
+name gen med 6
+gen med 6
+name med 6
+two daughters ages 5
+daughters ages 5
+two ages 9
+abuse alcohol 1
+alcohol abuse 4
+female who 5
+father side 6
+years 12 2
+12 years 3
+paternal grandmother 7
+paternal had 6
+now years 3
+years now 2
+died mi 15
+age mi 1
+mi age 8
+had mi 3
+mi had 2
+sample type general 5
+type general 5
+sample general 5
+two daughters 5
+ear pain 8
+pain mom 3
+mom pain 2
+name gen 6
+his wife 5
+currently years 3
+years currently 2
+past medical 6
+his medication father 2
+his father medication 3
+father medication 3
+medication father 2
+social history 19
+social history she 6
+social she 6
+who healthy 9
+kidney failure 5
+associated maternal 5
+associated mother 6
+coronary disease 13
+maternal grandfather 7
+grandfather had 5
+she so 2
+so she 5
+colon cancer 16
+if her 3
+her if 2
+years ago 8
+heart failure 15
+several but 5
+psychiatric family 2
+family psychiatric 3
+psychiatric history 5
+brothers sisters 12
+no brothers 6
+two brothers 10
+sample report subjective 13
+report subjective 13
+sample subjective 13
+patient admits 18
+history patient admits 15
+history admits 18
+no other 6
+other but 2
+but other 3
+stroke hypertension 5
+had stroke 5
+one sisters 1
+sisters one 4
+having some 5
+no having 5
+maternal grandmother 8
+grandmother maternal 2
+maternal who 5
+does not 10
+not does 2
+patient not does 2
+patient does not 3
+patient does 5
+lives both 5
+father both 3
+both father 4
+fhx died 16
+fhx father died 10
+fhx died father 2
+fhx father 20
+after being 6
+hypertension mother 2
+mother hypertension 4
+breast cancer 25
+cancer breast 4
+did not 10
+she did 5
+significant family 2
+family significant 8
+history family significant 1
+significant family history 2
+family history significant 5
+significant history 2
+history significant 7
+significant her 5
+her significant 4
+male here 8
+white male 12
+here his 12
+her here 5
+here her 5
+grandmother died 5
+heart disease 14
+diabetes type 2
+type diabetes 6
+her son 9
+patient lives 14
+his lives 2
+lives his 13
+years old 30
+sample type 10
+had type 6
+also sister 2
+sister also 4
+also had 10
+father also 7
+also father 1
+she also 10
+present illness 18
+present illness this 13
+this present 2
+present this 13
+history present 17
+there because 2
+because there 4
+patient states 3
+states patient 2
+she states 13
+states she 6
+mother states 16
+states mother 7
+today his 4
+his today 2
+reports patient 3
+patient reports 5
+reports his 5
+mother reports 15
+reports mother 5
+illness this 15
+illness patient 7
+patient illness 2
+have disease 5
+there no 8
+have father 1
+father have 6
+very well 6
+transcription sample report 16
+sample transcription report 9
+transcription report 25
+medical transcription sample 16
+sample medical transcription 9
+sample transcription 9
+transcription sample 16
+medical transcription 25
+one sister 8
+sister one 2
+one brother 14
+two had 5
+had two 1
+she two 13
+two she 2
+sample report 25
+sample medical 9
+medical sample 16
+father been 6
+been father 2
+family medical history 12
+medical history family 1
+family medical 12
+medical family 1
+medical history father 8
+medical father 8
+medical history 15
+history medical 4
+years sister 3
+sister years 2
+his sister 17
+age years 7
+years age 6
+his mom 14
+mom his 6
+her mom 5
+daughter her 6
+her daughter 28
+who died 8
+died father 6
+father died 47
+her died father 2
+her father died 8
+died her 4
+her died 17
+mother died 41
+died mother 2
+brother who 21
+his brother 14
+brother his 4
+who mother 4
+mother who 17
+father had 25
+had father 1
+history family 1
+family history 117
+his father 33
+father his 4
+father her 2
+her father 33
+patient history 2
+history patient 49
+his mother 64
+mother his 8
+mother her 20
+her mother 68
