@@ -5,20 +5,19 @@
 
 # Step:
 # 1. read one word association
-# 2. if contain the next word association,
-#
-#    Note: no need to remove duplicate words
-# 2. Write each bag of words as one line to the output
+# 2. find all the corresponding frequent word associations
+# 3. create a dictionary map close word association to its frequent word associations
+# 4. save all found closed word associations and dictionary
 #
 # Command line arguments:
 # [input1]  - a txt file containing all of the word associations
 # [output1]  - a txt file containing all closed word associations
 # [output2] - a filename to store dictionary which maps closed word associations to frequent word associations
 # input1: primitive_word_associations.txt
-# output1: closed_word_associations.txt
-# output2: dictionary.txt
+# output1: primitive_closed_word_associations.txt
+# output2: dictionary.p
 #
-# usage: #python extract_sentences_for_each_word_association.py [input1] [input2] [output1] [output2]
+# usage: #python extract_sentences_for_each_word_association.py [input1] [output1] [output2]
 #######################################################################################################################
 
 import sys

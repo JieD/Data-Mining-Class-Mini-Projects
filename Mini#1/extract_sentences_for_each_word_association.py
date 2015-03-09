@@ -2,19 +2,19 @@
 #
 # This script extract sentences that contain a word association.
 # For each word association:
-# 1.
-#
-#    Note: no need to remove duplicate words
-# 2. Write each bag of words as one line to the output
+# 1. find all the containing sentences
+# 2. count its appearances in different reports, remove it if appears in less than MIN_SUP reports
+# 3. write word association and its containing sentences to output file
 #
 # Command line arguments:
 # [input1]  - a txt file containing all of the word associations
 # [input2]  - a txt file containing all of family history sentences
-# [output] - a text file containing word associations and the containing family history sentences
+# [output1] - a text file containing word associations
+# [output2] - a text file containing word associations and containing family history sentences
 # input1: primitive_closed_word_associations.txt
 # input2: family_history_sentences.txt
-# output1: word_associations.txt
-# output2: word_association_with_sentences.txt
+# output1: closed_word_associations.txt
+# output2: closed_word_association_with_sentences.txt
 #
 # usage: #python extract_sentences_for_each_word_association.py [input1] [input2] [output1] [output2]
 #
@@ -66,12 +66,6 @@ def main():
             if sent == '': # EOF
                 break
 
-            #sent = sent.replace('\n', ' ').replace('\r', '') # remove newline
-            #if len(sent.split()) > 1:
-            #    if contain_association(sent, association):
-            #        word_association_sentences_file.write(sent + '\n')
-                    # containing_sentences.append(sent)
-
             # check all sentences belonging to the same report
             while 1:
                 sent = sent.replace('\n', ' ').replace('\r', '') # remove newline
@@ -91,18 +85,6 @@ def main():
             for sent in containing_sentences:
                 word_association_sentences_file.write(sent + '\n')
 
-
-
-        # write all sentences belonging to the same report to one line
-        # while 1:
-        #sentence = sentence.replace('\n', ' ').replace('\r', '') # remove newline
-        # skip report name line
-        #if len(line.split()) > 1:
-        #    out_file.write(line)
-        #else: # This line is the report information. It marks reading a new report.
-        #    out_file.write('\n')
-        #    break
-            #sentence = in_file.readline()
 
 if __name__ == "__main__":
     main()

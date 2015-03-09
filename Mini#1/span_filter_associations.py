@@ -1,103 +1,109 @@
 ########################################################################################################################
-# This script removes word associations by apply word span filter k = 3, 5, 10.
+# This script removes word associations if they span over k = 3, 5, 10 words.
 #
 # Filter each word association by the word span, k = 3, 5, 10.
 # Only keep the associations that meet the span requirement with more than 60% support.
 # (Out of all the original sentences that contain a word association, 60% of them also
 #  meet the span requirement)
+# For each closed word association, store its corresponding frequent word associations with span info into dictionaries
 #
 # Command line arguments:
 # [input1]  - a txt file containing all the word associations and their containing original sentences
-# [output] - a text file to write all filtered word associations
-# input1:  primitive_word_associations.txt
-# input2: family_history_sentences.txt
-# output: filter_applied_associations.txt
+# [input2] - a dictionary which maps closed word associations to its corresponding frequent word associations
+# input1: closed_word_association_with_sentences.txt
+# input2: dictionary.p
 #
-# usage: #python span_filter_associations.py [input1] [input2] [output]
+# usage: #python span_filter_associations.py [input1] [input2]
 #
 #######################################################################################################################
 import sys
 import re
+import pickle
 
 def main():
-    SPAN_LIST = [3, 5, 10]
-    OUTPUT_FILE = 'results/word_association_with_span_'
-
-    if len(sys.argv) is not 2:
-        print 'incorrect arguments\nneed: input_file.txt'
+    if len(sys.argv) is not 3:
+        print 'incorrect arguments\nneed: input_file1.txt input_file2.txt'
         sys.exit(2)
     else:
         input_file1 = sys.argv[1]
         input_file2 = sys.argv[2]
-    association_file = open(input_file1, 'r')
 
-    out = []
+    association_file = open(input_file1, 'r')
+    dictionary = pickle.load(open(input_file2, "rb"))
+    SPAN_LIST = [3, 5, 10]
+
+    # prepare output files
+    dictionary_with_span = [{}, {}, {}] # store span filtered dictionaries
+    dictionary_names = []
     loop_count = len(SPAN_LIST)
     for i in range(0, loop_count):
-        out_file_name = OUTPUT_FILE + str(SPAN_LIST[i]) + '.txt'
-        out.append(open(out_file_name, 'w'))
+        dictionary_names.append('results/dictionary_with_span_' + str(SPAN_LIST[i]) + '.p')
+
+    #out1 = open('results/association_with_span_3.txt', 'w')
+    #out2 = open('results/association_with_span_5.txt', 'w')
+    #out3 = open('results/association_with_span_10.txt', 'w')
+    #out = [out1, out2, out3]
 
     while 1:
-        file_count = 0
-        span_counts = [0, 0, 0]
-
         line = association_file.readline()
         if line == '': # EOF
+            for i in range(0, loop_count):
+                pickle.dump(dictionary_with_span[i], open(dictionary_names[i], "wb"))
+                out[i].close()
             break
-        association = line.split()
-        association.pop() # remove support value
-        original_history_file = open(input_file2, 'r')
+        if line == '\n':
+            continue
 
-        # apply word span filters
-        while 1:
-            sent = original_history_file.readline()
-            if sent == '': # EOF
-                if file_count > 0:
-                    for i in range (0, loop_count):
-                        if (span_counts[i] * 1.0 / file_count) >= 0.6:
-                            out[i].write(line)
-                break
-            #if all(x in sent for x in association): not good e.g. 'fam' in 'family history ' == True
-            if contain_association(sent, association):
-                file_count += 1
-                results = check_span(sent, association, SPAN_LIST)
+        # read the closed word association line
+        closed_word_association = line.split()
+        frequency = int(closed_word_association.pop()) # remove support value
+        key = ' '.join(closed_word_association)
+        frequent_word_associations = dictionary[key]
+        filtered_frequent_word_associations = [[], [], []] # to store frequent word associations for each word span
 
+        # read all containing sentences
+        sents = []
+        for i in range (0, frequency):
+            sents.append(association_file.readline())
+
+        # apply word filters to all corresponding frequent word associations
+        for word_association in frequent_word_associations:
+            span_counts = [0, 0, 0]
+            # check span
+            for sent in sents:
+                results = check_span(word_association, sent, SPAN_LIST)
+                # keep word associations that meet word span requirements
                 for i in range (0, loop_count):
-                    try:
-                        if results[i]: span_counts[i] += 1
-                    except IndexError:
-                        print span_counts
-                        print results
-                        print i
-                        print association
-                        print sent
+                    if results[i]: span_counts[i] += 1
+            for i in range (0, loop_count):
+                if (span_counts[i] * 1.0/frequency) >= 0.6:
+                    filtered_frequent_word_associations[i].append(word_association)
+                    #out[i].write(' '.join(word_association) + '\n')
 
-    for i in range(0, loop_count):
-        out[i].close()
+        # save to dictionaries
+        for i in range (0, loop_count):
+            if len(filtered_frequent_word_associations[i]) > 0:
+                dictionary_with_span[i][key] = filtered_frequent_word_associations[i]
 
-def contain_association(sent, association):
-    regex1 = r'\b' + association[0] + r'\b'
-    regex2 = r'\b' + association[1] + r'\b'
-    pattern1 = re.compile(regex1, re.I)
-    pattern2 = re.compile(regex2, re.I)
-    if pattern1.search(sent) is not None:
-        if pattern2.search(sent) is not None:
-            return True
-    return False
 
-def check_span(sent, association, spans):
+def check_span(association, sent, spans):
     results = [False, False, False]
-    words = sent.split()
-    try:
-        index1 = words.index(association[0])
-        index2 = words.index(association[1])
-        for i in range(0, len(spans)):
-            if (abs(index1 - index2) + 1) >= spans[i]:
+    sent_words = sent.split()
+    indexes = find_indexes(association, sent_words)
+    min_index, max_index = min(indexes), max(indexes)
+    loop_count = len(spans)
+    for i in range(0, loop_count):
+        if len(association) <= spans[i]: # association length is not greater than spans
+            if max_index - min_index + 1 <= spans[i]:
                 results[i] = True
-        return results
-    except ValueError: # caused by unrecognizable mark
-        #TODO: check span filter
-        return results
+    return results
+
+# find source words indexes in target
+def find_indexes(source, target):
+    indexes = []
+    for source_word in source:
+        indexes.append(target.index(source_word))
+    return indexes
 
 if __name__ == "__main__":
     main()
