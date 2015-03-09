@@ -19,3 +19,6 @@ def isContainWord(sent, word):
     regex = r'\b' + word + r'\b'
     pattern = re.compile(regex, re.I)
     return pattern.search(sent) is not None
+
+def listToString(list):
+    return ' '.join(list)
