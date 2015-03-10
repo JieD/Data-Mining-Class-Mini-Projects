@@ -8,7 +8,7 @@
 # input:  family_history_sentences.txt
 # output: stopwords_removed_sentences.txt
 #
-# usage: #python removeStopwords.py [input] [output]
+# usage: #python remove_stopwords.py [input] [output]
 #######################################################################################
 
 import sys

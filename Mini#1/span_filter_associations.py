@@ -39,10 +39,11 @@ def main():
     for i in range(0, loop_count):
         dictionary_names.append('results/dictionary_with_span_' + str(SPAN_LIST[i]) + '.p')
 
-    #out1 = open('results/association_with_span_3.txt', 'w')
-    #out2 = open('results/association_with_span_5.txt', 'w')
-    #out3 = open('results/association_with_span_10.txt', 'w')
-    #out = [out1, out2, out3]
+    # write out for easy checking
+    out1 = open('results/association_with_span_3.txt', 'w')
+    out2 = open('results/association_with_span_5.txt', 'w')
+    out3 = open('results/association_with_span_10.txt', 'w')
+    out = [out1, out2, out3]
 
     while 1:
         line = association_file.readline()
@@ -78,7 +79,7 @@ def main():
             for i in range (0, loop_count):
                 if (span_counts[i] * 1.0/frequency) >= 0.6:
                     filtered_frequent_word_associations[i].append(word_association)
-                    #out[i].write(' '.join(word_association) + '\n')
+                    out[i].write(' '.join(word_association) + '\n')
 
         # save to dictionaries
         for i in range (0, loop_count):
@@ -97,6 +98,7 @@ def check_span(association, sent, spans):
             if max_index - min_index + 1 <= spans[i]:
                 results[i] = True
     return results
+
 
 # find source words indexes in target
 def find_indexes(source, target):

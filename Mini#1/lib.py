@@ -1,4 +1,5 @@
 import re
+import os
 
 # remove parenthesis around frequency
 def clean_word_association_sent(word_association_sent):
@@ -22,3 +23,7 @@ def isContainWord(sent, word):
 
 def listToString(list):
     return ' '.join(list)
+
+def create_directory(dir_name):
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)

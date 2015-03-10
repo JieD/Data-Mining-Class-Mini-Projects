@@ -5,7 +5,7 @@
 #
 #######################################################################################################################
 
-import os
+import lib
 
 N = [100, 200, 500, 1000]
 ROOT_DIR = 'ordered_lists'
@@ -25,9 +25,6 @@ NO_FAMILY_MEMBER_NO_DISEASE = 'no_family_member_no_disease.txt'
 
 def main():
     make_directory()
-
-    print SPAN_DIR
-    print CHILD_DIR
 
     for i in range(0, len(SPAN_DIR)):
         dir = SPAN_DIR[i] + '/'
@@ -74,21 +71,19 @@ def choose_top_n(input, output, n):
 
 
 def make_directory():
-    create_directory(ROOT_DIR)
+    lib.create_directory(ROOT_DIR)
     for i in range(0, len(SPAN_DIR)):
         SPAN_DIR[i] = ROOT_DIR + '/' + SPAN_DIR[i]
-        create_directory(SPAN_DIR[i])
+        lib.create_directory(SPAN_DIR[i])
         tem_dir = []
         for j in range(0, len(N_DIR)):
             dir = SPAN_DIR[i] + '/' + N_DIR[j]
             tem_dir.append(dir)
-            create_directory(dir)
+            lib.create_directory(dir)
         CHILD_DIR.append(tem_dir)
 
 
-def create_directory(dir_name):
-    if not os.path.exists(dir_name):
-        os.makedirs(dir_name)
+
 
 
 def order_list_by_one_attribute(ins, outs1, outs2, attribute_file_name):

@@ -1,10 +1,12 @@
+mkdir results
 find data/ -type f > results/report_file_names.txt
 python extract_sentences_containing_family_member.py results/report_file_names.txt results/family_history_sentences.txt
-python removeStopwords.py results/family_history_sentences.txt results/stopwords_removed_sentences.txt
+python remove_stopwords.py results/family_history_sentences.txt results/stopwords_removed_sentences.txt
 python prepare_bags_of_words.py results/stopwords_removed_sentences.txt results/bag_of_words_sentences.txt
 apriori\ 2/apriori/src/apriori -ts -s-5 -m2 results/bag_of_words_sentences.txt results/primitive_word_associations.txt
-apriori\ 2/apriori/src/apriori -tc -s-5 -m2 results/bag_of_words_sentences.txt results/primitive_closed_word_associations.txt
-python connect_closed_with_frequent_word_associations.py results/primitive_word_associations.txt results/primitive_closed_word_associations1.txt results/dictionary.p
-python extract_sentences_for_each_word_association.py results/primitive_closed_word_associations1.txt results/family_history_sentences.txt results/closed_word_associations1.txt results/closed_word_association_with_sentences1.txt
-python span_filter_associations.py results/closed_word_association_with_sentences1.txt results/dictionary.p
+python connect_closed_with_frequent_word_associations.py results/primitive_word_associations.txt results/primitive_closed_word_associations.txt results/dictionary.p
+python extract_sentences_for_each_word_association.py results/primitive_closed_word_associations.txt results/family_history_sentences.txt results/closed_word_associations.txt results/closed_word_association_with_sentences.txt
+python span_filter_associations.py results/closed_word_association_with_sentences.txt results/dictionary.p
+python make_word_lists.py results/closed_word_association_with_sentences.txt
 python order_word_lists.py
+python make_ordered_word_lists.py
