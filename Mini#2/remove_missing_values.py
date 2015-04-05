@@ -31,7 +31,7 @@ def remove_missing_value(input, output):
             break
         if line == '\r' or line == '\n':  #skip empty line
             continue
-        
+
         if not is_contain_missing_value(line):
             out_f.write(line)
             File_Size += 1
