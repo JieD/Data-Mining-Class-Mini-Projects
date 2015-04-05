@@ -135,45 +135,10 @@ def write_categorical_count(file_name):
 
 
 # sort data in each continuous dictionary by its key in ascending order
-# calculate data for histogram with 3 different bin-widths
 def write_continuous_data(file_name):
     out = open(file_name, 'w')
     order_continuous_data()
-    bin_dics = get_proper_bins()
-
-    for i in range(0, num_coutinuous):
-        bin_dic = bin_dics[i]
-        data_dic = continuous_dics[i]
-        min_v, max_v = get_min_max(data_dic.keys())
-        for bin_num in bin_dic.keys():
-            bin_count = BinCount(min_v, max_v, bin_num, bin_dic[bin_num])
-
-
-
     for element in continuous_dics:
-        #items = element.items()
-        #sorted_list = sorted(items, key=lambda item: int(item[0]))  # sort by key value
-        #sorted_key = [x[0] for x in sorted_list]
-
-        #distance = get_data_distance(sorted_key)
-        #print "distance: {0}".format(distance)
-        #if distance <= 100:
-        #   bin_dic = get_bin_info(distance)
-        #ks = Ks
-
-
-        #print sorted_list
-        #print sorted_key
-        #collect_statistical_data(sorted_list, sorted_key)
-
-        #separator_list = histogram(sorted_list, sorted_key)
-        #print separator_list
-        #print get_separator_range(separator_list)
-        #for i in range(0, K1):
-        #    for value in sorted_key:
-
-
-
         # write to file
         for key in element.keys():
             count = element[key]
@@ -195,6 +160,27 @@ def order_continuous_data():
         for key in sorted_key:
             ordered_dict[int(key)] = element[key]
         continuous_dics[i] = ordered_dict
+
+
+def write_histogram_data(file_name):
+    out = open(file_name, 'w')
+    bin_dics = get_proper_bins()
+
+    for i in range(0, num_coutinuous):
+        bin_dic = bin_dics[i]
+        data_dic = continuous_dics[i]
+        min_v, max_v = get_min_max(data_dic.keys())
+        out.write("min: {0}, max: {1}\n".format(min_v, max_v))
+        histogram_dics = {}
+        for bin_num in bin_dic.keys():
+            out.write("bin_num: {0}, bin_width: {1}\n".format(bin_num, bin_dic[bin_num]))
+            bin_count = helper.BinCount(min_v, max_v, bin_num, bin_dic[bin_num])
+            bin_count.generate_bins()
+            histogram_dic = get_histogram_dic(data_dic, bin_count)
+            write_dic(histogram_dic, out)
+            histogram_dics[bin_num] = histogram_dic
+        out.write("\n")
+    out.write("\n\n")
 
 
 def get_proper_bins():
@@ -258,6 +244,39 @@ def get_standard_bin_info(distance):
         bin_width = distance / k
         bin_dict[k] = bin_width
     return bin_dict
+
+
+# generate count for each bin
+def get_histogram_dic(data_dic, bin_count):
+    histogram_dic = OrderedDict()
+    keys = data_dic.keys()
+    values = data_dic.values()
+    high_index = 0
+    for bin in bin_count.get_bins():
+        low, high = bin
+        low_index = keys.index(low) if low in keys else high_index + 1
+        if high not in keys:
+            high = find_index(high, keys, False)
+        high_index = keys.index(high)
+        count_list = values[low_index:high_index+1]
+        histogram_dic[str(bin)] = helper.combine(count_list)
+        print "{0}: {1}\n".format(str(bin), histogram_dic[str(bin)])
+    return histogram_dic
+
+
+def find_index(element, l, low):
+    step = -1 if low else 1
+    while (1):
+        if element not in l:
+            element += step
+        else:
+            break
+    return element
+
+
+def write_dic(dic, out):
+    for key in dic.keys():
+        out.write("{0}: {1}\n".format(key, dic[key]))
 
 
 def histogram(collection, ol):
@@ -337,23 +356,21 @@ def get_statistical_data(source1, source2, target):
 
 
 def main():
-    if len(sys.argv) is not 4:
-        print 'incorrect arguments\nneed: input_file.txt out_file1.txt out_file2.txt'
+    if len(sys.argv) is not 5:
+        print 'incorrect arguments\nneed: input_file.txt out_file1.txt out_file2.txt out_file3.txt'
         sys.exit(2)
     else:
         argv1 = sys.argv[1]
         argv2 = sys.argv[2]
         argv3 = sys.argv[3]
+        argv4 = sys.argv[4]
 
     init_dics()
     parse_file(argv1)
-    print file_size
-
-    #print_dics()
-    #reconstruct_data()
+    #print file_size
     write_categorical_count(argv2)
     write_continuous_data(argv3)
-
+    write_histogram_data(argv4)
 
 
 if __name__ == "__main__":
