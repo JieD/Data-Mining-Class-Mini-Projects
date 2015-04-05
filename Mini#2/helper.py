@@ -61,15 +61,19 @@ class BinCount(object):
         self.max = max
         self.bin_nums = bin_nums
         self.bin_width = bin_width
+        self.bins = []
+        print "min: {0}, max: {1}, bin_nums: {2}, bin_width: {3}".format(self.min, self.max, self.bin_nums, self.bin_width)
 
     def generate_bins(self):
-        bins = []
         for i in range(0, self.bin_nums):
-            low = bins[i-1][1] + 1 if i > 0 else self.min
+            low = self.bins[i-1][1] + 1 if i > 0 else self.min
             high = low + self.bin_width - 1
-            bins.append([low, high])
-        bins[self.bin_nums-1][1] = self.max
-        print bins
+            self.bins.append([low, high])
+        self.bins[self.bin_nums-1][1] = self.max
+        print self.bins
+
+    def get_bins(self):
+        return self.bins
 
 
 def combine(count_list):
@@ -96,4 +100,5 @@ if __name__ == "__main__":
     print count1
     print count2
     print combine([count1, count2])
+    bin_c = BinCount(1,2,3,4)
     #print key_counts.get_data()
