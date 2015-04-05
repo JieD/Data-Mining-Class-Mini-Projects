@@ -1,0 +1,1 @@
+cat adult.data.csv adult.test.csv > adult.all.csv
