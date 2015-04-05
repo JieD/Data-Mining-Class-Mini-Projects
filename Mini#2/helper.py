@@ -54,6 +54,24 @@ class KeyCount(object):
     def get_data(self):
         return self.data
 
+
+class BinCount(object):
+    def __init__(self, min, max, bin_nums, bin_width):
+        self.min = min
+        self.max = max
+        self.bin_nums = bin_nums
+        self.bin_width = bin_width
+
+    def generate_bins(self):
+        bins = []
+        for i in range(0, self.bin_nums):
+            low = bins[i-1][1] + 1 if i > 0 else self.min
+            high = low + self.bin_width - 1
+            bins.append([low, high])
+        bins[self.bin_nums-1][1] = self.max
+        print bins
+
+
 def combine(count_list):
     total_count = Count()
     for count in count_list:
