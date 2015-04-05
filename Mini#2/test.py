@@ -7,6 +7,7 @@ import sys
 import helper
 import operator
 import math
+from collections import OrderedDict
 
 CLASSES = ['>50K', '<=50K']
 WORKCLASSES = ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov', 'Local-gov', 'State-gov',
@@ -34,8 +35,9 @@ dics = {}
 categorical_dics = []
 continuous_dics = []
 histogram_dics = []
-K = 10
-Ratios = [0.4, 0.7, 1.0]
+Max_k = 20
+Ks = [8, 14, 20]
+num_coutinuous = 0
 
 # init variables
 def init_dics():
@@ -43,13 +45,14 @@ def init_dics():
     sex_dic, native_country_dic = {}, {}, {}, {}, {}, {}, {}, {}
     age_dic, fnlwgt_dic, education_num_dic, capital_gain_dic, capital_loss_dic, hours_per_week_dic \
         = {}, {}, {}, {}, {}, {}
-    global dics, categorical_dics, continuous_dics
+    global dics, categorical_dics, continuous_dics, num_coutinuous
     dics = { 0: age_dic,            1: workclass_dic,    2: fnlwgt_dic,       3: education_dic, 4: education_num_dic,
              5: marital_status_dic, 6: occupation_dic,   7: relationship_dic, 8: race_dic,      9: sex_dic,
             10: capital_gain_dic,  11: capital_loss_dic, 12: hours_per_week_dic, 13: native_country_dic}
     categorical_dics = [workclass_dic, education_dic, marital_status_dic, occupation_dic, relationship_dic, race_dic,
                         sex_dic, native_country_dic]
     continuous_dics = [age_dic, fnlwgt_dic, education_num_dic, capital_gain_dic, capital_loss_dic, hours_per_week_dic]
+    num_coutinuous = len(continuous_dics)
 
 
 # clear values for all dictionaries
@@ -132,17 +135,38 @@ def write_categorical_count(file_name):
 
 
 # sort data in each continuous dictionary by its key in ascending order
-# calculate statistical value: min, max, mean, median, Q1, Q3
-def reconstruct_continuous_data(file_name):
+# calculate data for histogram with 3 different bin-widths
+def write_continuous_data(file_name):
     out = open(file_name, 'w')
+    order_continuous_data()
+    bin_dics = get_proper_bins()
+
+    for i in range(0, num_coutinuous):
+        bin_dic = bin_dics[i]
+        data_dic = continuous_dics[i]
+        min_v, max_v = get_min_max(data_dic.keys())
+        for bin_num in bin_dic.keys():
+            bin_count = BinCount(min_v, max_v, bin_num, bin_dic[bin_num])
+
+
+
     for element in continuous_dics:
-        items = element.items()
-        sorted_list = sorted(items, key=lambda item: int(item[0]))  # sort by key value
-        sorted_key = [x[0] for x in sorted_list]
+        #items = element.items()
+        #sorted_list = sorted(items, key=lambda item: int(item[0]))  # sort by key value
+        #sorted_key = [x[0] for x in sorted_list]
+
+        #distance = get_data_distance(sorted_key)
+        #print "distance: {0}".format(distance)
+        #if distance <= 100:
+        #   bin_dic = get_bin_info(distance)
+        #ks = Ks
+
+
         #print sorted_list
         #print sorted_key
         #collect_statistical_data(sorted_list, sorted_key)
-        separator_list = histogram(sorted_list, sorted_key)
+
+        #separator_list = histogram(sorted_list, sorted_key)
         #print separator_list
         #print get_separator_range(separator_list)
         #for i in range(0, K1):
@@ -151,12 +175,89 @@ def reconstruct_continuous_data(file_name):
 
 
         # write to file
-        for key in sorted_key:
-            count = element[str(key)]
+        for key in element.keys():
+            count = element[key]
             out.write(str(key) + str(count))
             out.write('\n')
         out.write('\n\n')
     out.close()
+
+
+# order continuous data by its key in ascending order
+def order_continuous_data():
+    length = len(continuous_dics)
+    for i in range(0, length):
+        element = continuous_dics[i]
+        ordered_dict = OrderedDict()
+        items = element.items()
+        sorted_list = sorted(items, key=lambda item: int(item[0]))  # sort by key value
+        sorted_key = [x[0] for x in sorted_list]
+        for key in sorted_key:
+            ordered_dict[int(key)] = element[key]
+        continuous_dics[i] = ordered_dict
+
+
+def get_proper_bins():
+    bin_dics = [{}, {}, {}, {}, {}, {}]
+    length = len(continuous_dics)
+    for i in range(0, length):
+        element = continuous_dics[i]
+        distance = get_data_distance(element.keys())
+        print "distance: {0}".format(distance)
+        if distance <= 100:
+            get_bin_info(distance)
+            bin_dic = select_bin_info(i)
+        else:
+            bin_dic = get_standard_bin_info(distance)
+        bin_dics[i] = bin_dic
+        print bin_dic
+        print '\n'
+    return bin_dics
+
+
+def get_data_distance(ol):
+    min_v, max_v = get_min_max(ol)
+    print "Min: {0}, Max: {1}".format(min_v, max_v)
+    return max_v - min_v + 1
+
+
+def get_min_max(ol):
+    length = len(ol)
+    for i in range(0, length):
+        ol[i] = int(ol[i])
+    min_v = ol[0]
+    max_v = ol[length - 1]
+    return [min_v, max_v]
+
+
+def get_bin_info(distance):
+    bin_dic = {1: distance}
+    max_d = Max_k if distance >= Max_k else distance
+    for divisor in range(2, max_d + 1):
+        quotient, remainder = divmod(distance, divisor)
+        if remainder == 0:
+            bin_dic[divisor] = quotient
+        elif (remainder * 10.0) / divisor > 6.5:
+            bin_dic[divisor] = quotient + 1
+    #print bin_dic
+    return bin_dic
+
+
+def select_bin_info(index):
+    if index is 0:
+        return {25: 3, 15: 5, 7: 11}
+    elif index is 2:
+        return {16: 1, 8: 2, 4: 4}
+    elif index is 5:
+        return {20: 5, 10: 10, 5: 20}
+
+
+def get_standard_bin_info(distance):
+    bin_dict = {}
+    for k in Ks:
+        bin_width = distance / k
+        bin_dict[k] = bin_width
+    return bin_dict
 
 
 def histogram(collection, ol):
@@ -251,7 +352,7 @@ def main():
     #print_dics()
     #reconstruct_data()
     write_categorical_count(argv2)
-    reconstruct_continuous_data(argv3)
+    write_continuous_data(argv3)
 
 
 
