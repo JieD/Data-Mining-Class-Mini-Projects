@@ -116,20 +116,25 @@ def reconstruct_data():
 
 
 # sort data in each categorical dictionary by its count in descending order
+# save the new ordered dictionary
 # write all categorical dictionaries to a file
 def write_categorical_count(file_name):
     out = open(file_name, 'w')
-    for element in categorical_dics:
+    for i in range(0, len(categorical_dics)):
+        element = categorical_dics[i]
+        ordered_categorical_dic = OrderedDict()
         items = element.items()
         sorted_list = sorted(items, key=lambda item: item[1].get_total_count(), reverse=True)  # sort by count
         sorted_key = [x[0] for x in sorted_list]
-        #print sorted_list
-        #print sorted_key
-        # write to file
+
+        # save the ordered dictionary and write to file
         for key in sorted_key:
             count = element[key]
+            ordered_categorical_dic[key] = count
             out.write(key + str(count))
             out.write('\n')
+        categorical_dics[i] = ordered_categorical_dic
+        print ordered_categorical_dic
         out.write('\n\n')
     out.close()
 
@@ -197,7 +202,7 @@ def get_proper_bins():
             bin_dic = get_standard_bin_info(distance)
         bin_dics[i] = bin_dic
         print bin_dic
-        print '\n'
+    print '\n'
     return bin_dics
 
 
@@ -256,11 +261,12 @@ def get_histogram_dic(data_dic, bin_count):
         low, high = bin
         low_index = keys.index(low) if low in keys else high_index + 1
         if high not in keys:
-            high = find_index(high, keys, False)
+            high = find_index(high, keys, True)
         high_index = keys.index(high)
         count_list = values[low_index:high_index+1]
-        histogram_dic[str(bin)] = helper.combine(count_list)
-        print "{0}: {1}\n".format(str(bin), histogram_dic[str(bin)])
+        key = list_to_str(bin)
+        histogram_dic[key] = helper.combine(count_list)
+        print "{0} {1}\n".format(key, histogram_dic[key])
     return histogram_dic
 
 
@@ -274,10 +280,16 @@ def find_index(element, l, low):
     return element
 
 
+def list_to_str(l):
+    for i in range(len(l)):
+        l[i] = str(l[i])
+    return '-'.join(l)
+
+
 def write_dic(dic, out):
     for key in dic.keys():
-        out.write("{0}: {1}\n".format(key, dic[key]))
-
+        out.write("{0} {1}\n".format(key, dic[key]))
+    out.write('\n')
 
 def histogram(collection, ol):
     num_values = len(ol)
