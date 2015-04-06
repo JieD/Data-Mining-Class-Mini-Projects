@@ -1,14 +1,13 @@
 from collections import Counter
 
-LABEL = ['>50K', '<=50K']
-
 
 class Count(object):
-    def __init__(self):
+    def __init__(self, labels):
         self.__count = 0
         self.__accu_count = 0
         self.__c = Counter()
-        for element in LABEL:
+        self.labels = labels
+        for element in self.labels:
             self.__c[element] = 0
 
     def store(self, label):
@@ -35,7 +34,7 @@ class Count(object):
 
     def get_all_label_count(self):
         dictionary = {}
-        for label in LABEL:
+        for label in self.labels:
             dictionary[label] = self.get_label_count(label)
         return dictionary;
 
@@ -62,7 +61,7 @@ class BinCount(object):
         self.bin_nums = bin_nums
         self.bin_width = bin_width
         self.bins = []
-        print "min: {0}, max: {1}, bin_nums: {2}, bin_width: {3}".format(self.min, self.max, self.bin_nums, self.bin_width)
+        #print "min: {0}, max: {1}, bin_nums: {2}, bin_width: {3}".format(self.min, self.max, self.bin_nums, self.bin_width)
 
     def generate_bins(self):
         for i in range(0, self.bin_nums):
@@ -70,32 +69,32 @@ class BinCount(object):
             high = low + self.bin_width - 1
             self.bins.append([low, high])
         self.bins[self.bin_nums-1][1] = self.max
-        print self.bins
+        #print self.bins
 
     def get_bins(self):
         return self.bins
 
 
-def combine(count_list):
-    total_count = Count()
+def combine(count_list, labels):
+    total_count = Count(labels)
     for count in count_list:
         total = total_count.get_total_count()
         c_total = total + count.get_total_count()
         total_count.set_total_count(c_total)
-        for label in LABEL:
+        for label in labels:
             total_label = total_count.get_label_count(label)
             total_count.set_label_count(label, total_label + count.get_label_count(label))
     return total_count
 
 if __name__ == "__main__":
-    count1 = Count()
-    count1.store(LABEL[0])
-    count1.store(LABEL[0])
-    count1.store(LABEL[1])
+    count1 = Count(['0', '1'])
+    count1.store('0')
+    count1.store('0')
+    count1.store('1')
     count2 = Count()
-    count2.store(LABEL[1])
-    count2.store(LABEL[0])
-    count2.store(LABEL[1])
+    count2.store('1')
+    count2.store('0')
+    count2.store('1')
     #key_counts = KeyCount(1, count)
     print count1
     print count2
