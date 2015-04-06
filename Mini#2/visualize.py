@@ -4,6 +4,7 @@
 # create a list of data for each attribute,
 #
 import sys
+import globals
 import helper
 import operator
 import math
@@ -29,36 +30,11 @@ NATIVE_COUNTRIES = ['United-States', 'Cambodia', 'England', 'Puerto-Rico', 'Cana
                     'Haiti', 'Columbia', 'Hungary', 'Guatemala', 'Nicaragua', 'Scotland', 'Thailand',
                     'Yugoslavia', 'El-Salvador', 'Trinadad&Tobago', 'Peru', 'Hong', 'Holand-Netherlands']
 
-# declare global variables
-file_size = 0
-dics = {}
-categorical_dics = []
-continuous_dics = []
-histogram_dics = []
-Max_k = 20
-Ks = [8, 14, 20]
-num_coutinuous = 0
-
-# init variables
-def init_dics():
-    workclass_dic, education_dic, marital_status_dic, occupation_dic, relationship_dic, race_dic, \
-    sex_dic, native_country_dic = {}, {}, {}, {}, {}, {}, {}, {}
-    age_dic, fnlwgt_dic, education_num_dic, capital_gain_dic, capital_loss_dic, hours_per_week_dic \
-        = {}, {}, {}, {}, {}, {}
-    global dics, categorical_dics, continuous_dics, num_coutinuous
-    dics = { 0: age_dic,            1: workclass_dic,    2: fnlwgt_dic,       3: education_dic, 4: education_num_dic,
-             5: marital_status_dic, 6: occupation_dic,   7: relationship_dic, 8: race_dic,      9: sex_dic,
-            10: capital_gain_dic,  11: capital_loss_dic, 12: hours_per_week_dic, 13: native_country_dic}
-    categorical_dics = [workclass_dic, education_dic, marital_status_dic, occupation_dic, relationship_dic, race_dic,
-                        sex_dic, native_country_dic]
-    continuous_dics = [age_dic, fnlwgt_dic, education_num_dic, capital_gain_dic, capital_loss_dic, hours_per_week_dic]
-    num_coutinuous = len(continuous_dics)
-
 
 # clear values for all dictionaries
 def clear_values():
-    for key in dics.keys():
-        dics[key].clear()
+    for key in globals.dics.keys():
+        globals.dics[key].clear()
 
 
 # read the data file and count frequencies for each unique value
@@ -75,7 +51,7 @@ def parse_file(file_name):
             break
         if line == '\r' or line == '\n':  #skip empty line
             continue
-        file_size += 1
+        globals.file_size += 1
 
         # separate words and find class label
         ll = [x.strip() for x in line.split(',')]
@@ -84,7 +60,7 @@ def parse_file(file_name):
         # store each word to its corresponding dictionary and increase its counter
         for i in range(0, len(ll)):
             element = ll[i]
-            dic = dics[i]
+            dic = globals.dics[i]
             if element in dic:  # existing key
                 counter = dic[element]
                 counter.store(label)
@@ -94,11 +70,11 @@ def parse_file(file_name):
                 dic[element] = counter
 
 
-# print dics with parsed count info
+# print globals.dics with parsed count info
 def print_dics():
     readable_dics = {}
-    for key in dics.keys():
-        dic = dics[key]
+    for key in globals.dics.keys():
+        dic = globals.dics[key]
         r_dic = {}
         for dict_key in dic.keys():
             count = dic[dict_key]
@@ -108,8 +84,8 @@ def print_dics():
 
 
 def reconstruct_data():
-    for key in dics.keys():
-        dic = dics[key]
+    for key in globals.dics.keys():
+        dic = globals.dics[key]
         for dict_key in dic.keys():
             count = dic[dict_key]
             dic[dict_key] = count.get_count()
@@ -120,8 +96,8 @@ def reconstruct_data():
 # write all categorical dictionaries to a file
 def write_categorical_count(file_name):
     out = open(file_name, 'w')
-    for i in range(0, len(categorical_dics)):
-        element = categorical_dics[i]
+    for i in range(0, len(globals.categorical_dics)):
+        element = globals.categorical_dics[i]
         ordered_categorical_dic = OrderedDict()
         items = element.items()
         sorted_list = sorted(items, key=lambda item: item[1].get_total_count(), reverse=True)  # sort by count
@@ -133,8 +109,7 @@ def write_categorical_count(file_name):
             ordered_categorical_dic[key] = count
             out.write(key + str(count))
             out.write('\n')
-        categorical_dics[i] = ordered_categorical_dic
-        print ordered_categorical_dic
+        globals.categorical_dics[i] = ordered_categorical_dic#
         out.write('\n\n')
     out.close()
 
@@ -143,7 +118,7 @@ def write_categorical_count(file_name):
 def write_continuous_data(file_name):
     out = open(file_name, 'w')
     order_continuous_data()
-    for element in continuous_dics:
+    for element in globals.continuous_dics:
         # write to file
         for key in element.keys():
             count = element[key]
@@ -155,60 +130,59 @@ def write_continuous_data(file_name):
 
 # order continuous data by its key in ascending order
 def order_continuous_data():
-    length = len(continuous_dics)
-    for i in range(0, length):
-        element = continuous_dics[i]
+    for i in range(0, globals.num_coutinuous):
+        element = globals.continuous_dics[i]
         ordered_dict = OrderedDict()
         items = element.items()
         sorted_list = sorted(items, key=lambda item: int(item[0]))  # sort by key value
         sorted_key = [x[0] for x in sorted_list]
         for key in sorted_key:
             ordered_dict[int(key)] = element[key]
-        continuous_dics[i] = ordered_dict
+        globals.continuous_dics[i] = ordered_dict
 
 
 def write_histogram_data(file_name):
     out = open(file_name, 'w')
     bin_dics = get_proper_bins()
-
-    for i in range(0, num_coutinuous):
+    for i in range(0, globals.num_coutinuous):
+        histogram_three_dics = {}
         bin_dic = bin_dics[i]
-        data_dic = continuous_dics[i]
+        data_dic = globals.continuous_dics[i]
         min_v, max_v = get_min_max(data_dic.keys())
         out.write("min: {0}, max: {1}\n".format(min_v, max_v))
-        histogram_dics = {}
         for bin_num in bin_dic.keys():
             out.write("bin_num: {0}, bin_width: {1}\n".format(bin_num, bin_dic[bin_num]))
             bin_count = helper.BinCount(min_v, max_v, bin_num, bin_dic[bin_num])
             bin_count.generate_bins()
             histogram_dic = get_histogram_dic(data_dic, bin_count)
             write_dic(histogram_dic, out)
-            histogram_dics[bin_num] = histogram_dic
+            histogram_three_dics[bin_num] = histogram_dic
         out.write("\n")
+        globals.histogram_dics[i] = histogram_three_dics
     out.write("\n\n")
 
 
 def get_proper_bins():
     bin_dics = [{}, {}, {}, {}, {}, {}]
-    length = len(continuous_dics)
+    length = len(globals.continuous_dics)
     for i in range(0, length):
-        element = continuous_dics[i]
+        element = globals.continuous_dics[i]
         distance = get_data_distance(element.keys())
-        print "distance: {0}".format(distance)
+        #print "distance: {0}".format(distance)
         if distance <= 100:
             get_bin_info(distance)
             bin_dic = select_bin_info(i)
         else:
             bin_dic = get_standard_bin_info(distance)
         bin_dics[i] = bin_dic
-        print bin_dic
-    print '\n'
+        #print bin_dic
+    #print '\n'
     return bin_dics
 
 
 def get_data_distance(ol):
     min_v, max_v = get_min_max(ol)
-    print "Min: {0}, Max: {1}".format(min_v, max_v)
+    #print "Min: {0}, Max: {1}".format(min_v, max_v)
     return max_v - min_v + 1
 
 
@@ -223,7 +197,7 @@ def get_min_max(ol):
 
 def get_bin_info(distance):
     bin_dic = {1: distance}
-    max_d = Max_k if distance >= Max_k else distance
+    max_d = globals.Max_k if distance >= globals.Max_k else distance
     for divisor in range(2, max_d + 1):
         quotient, remainder = divmod(distance, divisor)
         if remainder == 0:
@@ -245,7 +219,7 @@ def select_bin_info(index):
 
 def get_standard_bin_info(distance):
     bin_dict = {}
-    for k in Ks:
+    for k in globals.Ks:
         bin_width = distance / k
         bin_dict[k] = bin_width
     return bin_dict
@@ -266,7 +240,7 @@ def get_histogram_dic(data_dic, bin_count):
         count_list = values[low_index:high_index+1]
         key = list_to_str(bin)
         histogram_dic[key] = helper.combine(count_list)
-        print "{0} {1}\n".format(key, histogram_dic[key])
+        #print "{0} {1}\n".format(key, histogram_dic[key])
     return histogram_dic
 
 
@@ -295,8 +269,8 @@ def histogram(collection, ol):
     num_values = len(ol)
     k = K if num_values >= K else num_values
     bin_width, adjust = refine_bin_width(get_bin_width(ol, k))
-    print "number of bins: {0}".format(k)
-    print "bin_width: {0}".format(bin_width)
+    #print "number of bins: {0}".format(k)
+    #print "bin_width: {0}".format(bin_width)
     separator_list = []
     for i in range(0, k):
         low = separator_list[i-1][1] + adjust if i > 0 else ol[i]
@@ -315,7 +289,7 @@ def get_bin_width(ol, k):
     length = len(ol)
     Min = ol[0]
     Max = ol[length-1]
-    print "Min: {0}, Max: {1}".format(Min, Max)
+    #print "Min: {0}, Max: {1}".format(Min, Max)
     return (Max - Min) / (k * 1.0)
 
 
@@ -361,8 +335,6 @@ def collect_statistical_data(collection, ol):
         print "{0} {1}".format(ol[i], str(p_count+count))
 
 
-
-
 def get_statistical_data(source1, source2, target):
     return source1 if abs(target - source1) >= abs(target - source2) else source2
 
@@ -377,7 +349,7 @@ def main():
         argv3 = sys.argv[3]
         argv4 = sys.argv[4]
 
-    init_dics()
+    globals.init()
     parse_file(argv1)
     #print file_size
     write_categorical_count(argv2)

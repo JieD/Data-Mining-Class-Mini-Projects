@@ -1,1 +1,3 @@
-cat adult.data.csv adult.test.csv > adult.all.csv
+cat in_data/adult.data.csv in_data/adult.test.csv > in_data/adult.all.csv
+mkdir out_data
+python visualize.py
