@@ -43,7 +43,7 @@ def main():
         print "{0}: {1}".format(label, Label_Count[label])
     write_categorical_count(categorical_file)
     write_continuous_data(continuous_file)
-    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums2)
+    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums)
     train_gaussian()
     test(test_file, bin)
 
@@ -64,7 +64,7 @@ def train(file, bin):
         print "{0}: {1}".format(label, Label_Count[label])
     write_categorical_count(categorical_file)
     write_continuous_data(continuous_file)
-    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums2)
+    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums)
     train_gaussian()
 
 
@@ -285,7 +285,7 @@ def compute_variance(dict, mean, label):
     for key in dict.keys():
         deviation = abs(key - mean)
         squared_d = deviation * deviation
-        sum += squared_d
+        sum += (squared_d * dict[key])
     sum = (sum * 1.0) / Label_Count[label]
     return sum
 
