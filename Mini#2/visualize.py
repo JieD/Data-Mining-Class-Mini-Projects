@@ -1,8 +1,3 @@
-#age, fnlwgt, education-num, capital-gain, capital-loss, hours-per-week,
-#workclass, education, marital-status, occupation, relationship, race, sex, native-country,
-
-# create a list of data for each attribute,
-#
 import sys
 import helper
 import operator
@@ -48,24 +43,25 @@ Label_Count = Counter()
 
 
 def main():
-    #if len(sys.argv) is not 5:
-    #    print 'incorrect arguments\nneed: input_file.txt out_file1.txt out_file2.txt out_file3.txt'
-    #    sys.exit(2)
-    #else:
-    #    argv1 = sys.argv[1]
-    #    argv2 = sys.argv[2]
-    #    argv3 = sys.argv[3]
-    #    argv4 = sys.argv[4]
-
-    visualize_files = ['in_data/adult.all.csv', 'out_data/categorical_all.txt', 'out_data/continuous_all.txt',
-                   'out_data/histogram_all.txt']
+    visualize_files = ['in_data/adult.all.csv', 'out_data/categorical.txt', 'out_data/continuous.txt',
+                   'out_data/histogram.txt', 'out_data/histogram_visual.txt']
     train_files = ['in_data/adult.data.csv', 'out_data/categorical_train.txt', 'out_data/continuous_train.txt',
-               'out_data/histogram_train.txt']
+               'out_data/histogram_train.txt', 'out_data/histogram_train_visual.txt']
+    init()
+    collect_statistics(visualize_files)
+    #clear()
+    #collect_statistics(train_files)
+
+
+def start():
+    visualize_files = ['in_data/adult.all.csv', 'out_data/categorical.txt', 'out_data/continuous.txt',
+                   'out_data/histogram.txt', 'out_data/histogram_visual.txt']
+    train_files = ['in_data/adult.data.csv', 'out_data/categorical_train.txt', 'out_data/continuous_train.txt',
+               'out_data/histogram_train.txt', 'out_data/histogram_train_visual.txt']
     init()
     collect_statistics(visualize_files)
     clear()
     collect_statistics(train_files)
-    train_classifier()
 
 
 # init variables
@@ -96,33 +92,45 @@ def init_by_keys(c_dics, key_list):
 
 # visualize data, write statistics to output files
 def collect_statistics(files):
-    data_file, categorical_file, continuous_file, histogram_file = files
+    data_file, categorical_file, continuous_file, histogram_file, histogram_file_visual = files
     parse_file(data_file)
     print "file_size: {0}".format(file_size)
     for label in CLASSES:
         print "{0}: {1}".format(label, Label_Count[label])
     write_categorical_count(categorical_file)
     write_continuous_data(continuous_file)
-    write_histogram_data(histogram_file)
+    write_histogram(histogram_file, histogram_file_visual)
 
 
-# clear dics & histogram_dics
+def write_histogram(histogram_file, histogram_file_visual):
+    write_histogram_data(histogram_file, histogram_file_visual, init_bin_nums())
+    #write_histogram_data(histogram_file, histogram_file_visual, [30, 30, 8, 60, 10, 10])
+    #write_histogram_data(histogram_file, histogram_file_visual, [10, 10, 4, 80, 60, 15])
+    #write_histogram_data(histogram_file, histogram_file_visual, [20, 30, 4, 20, 20, 12])
+
+
+def init_bin_nums():
+    bin_nums = []
+    for i in range(0, num_coutinuous):
+        bin_nums.append(Max_k)
+    return bin_nums
+
+
+# clear data
 def clear():
-    global file_size, dics, categorical_dics, continuous_dics, histogram_dics
+    global file_size, dics, categorical_dics, continuous_dics, histogram_dics, Label_Count
     file_size = 0
     for key in dics.keys():
         dics[key].clear()
     clear_dic_list(histogram_dics)
     init_cc()
+    for label in CLASSES:
+        Label_Count[label] = 0
 
 
 def clear_dic_list(dic_list):
     for dic in dic_list:
         dic.clear()
-
-
-def train_classifier():
-    print
 
 
 # read the data file and count frequencies for each unique value
@@ -210,8 +218,79 @@ def order_continuous_data():
         continuous_dics[i] = ordered_dict
 
 
+# collect data for histograms with bins, write to two files for easy reading and visualization
+def write_histogram_data(f1, f2, bin_nums):
+    global bin_dics, histogram_dics
+    out_r = open(f1, 'w')
+    out_v = open(f2, 'w')
+
+    # for each continuous attribute, calculate histogram data according to its given bin_num
+    for i in range(0, num_coutinuous):
+        bin_num = bin_nums[i]
+        bin_width, bin_num = get_bin_width_num(bin_num, i)
+        data_dic = continuous_dics[i]
+        min_v, max_v = get_min_max(data_dic.keys())
+        out_r.write("min: {0}, max: {1}\n".format(min_v, max_v))
+        out_v.write("min {0} max {1}\n".format(min_v, max_v))
+        out_r.write("bin_width: {0}, bin_num: {1}\n".format(bin_width, bin_num))
+        out_v.write("bin_width {0} bin_num {1}\n".format(bin_width, bin_num))
+
+        bin_count = helper.BinCount(min_v, max_v, bin_num, bin_width)
+        bin_count.generate_bins()
+        histogram_dic = get_histogram_dic(data_dic, bin_count)
+        write_dic(histogram_dic, out_r, out_v)
+
+        out_r.write("\n")
+        histogram_dics[i] = histogram_dic
+    out_r.write("\n\n")
+    out_v.write("\n\n")
+
+
+def get_bin_width_num(bin_num, index):
+    element = continuous_dics[index]
+    distance = get_data_distance(element.keys())
+    bin_width = distance / bin_num
+    if bin_width is 0: bin_width = 1
+
+    # calculate the real bin_nums
+    bin_num = distance / bin_width
+    if distance % bin_width is not 0: bin_num += 1
+    return [bin_width, bin_num]
+
+
+# generate count for each bin
+def get_histogram_dic(data_dic, bin_count):
+    histogram_dic = OrderedDict()
+    keys = data_dic.keys()
+    values = data_dic.values()
+    high_index = 0
+    for bin in bin_count.get_bins():
+        low, high = bin
+        low_index = keys.index(low) if low in keys else high_index + 1
+        if high not in keys:
+            high = find_index(high, keys, True)
+        high_index = keys.index(high)
+        count_list = values[low_index:high_index+1]
+        key = list_to_str(bin)
+        histogram_dic[key] = helper.combine(count_list, CLASSES)
+        #print "{0} {1}\n".format(key, histogram_dic[key])
+    return histogram_dic
+
+
+def write_dic(dic, out_r, out_v):
+    for key in dic.keys():
+        out_r.write("{0} {1}\n".format(key, dic[key]))
+        value = dic[key]
+        label_counts = []
+        for label in CLASSES:
+            label_counts.append(str(dic[key].get_label_count(label)))
+        out_v.write("{0} {1}\n".format(key, " ".join(label_counts)))
+    out_r.write('\n')
+    out_v.write('\n')
+
+
 # collect data for histograms with different bin choices
-def write_histogram_data(file_name):
+def write_histogram_dat1(file_name):
     global bin_dics
     out = open(file_name, 'w')
     if len(bin_dics) is 0:  # need to select proper bins
@@ -235,6 +314,7 @@ def write_histogram_data(file_name):
         out.write("\n")
         histogram_dics[i] = histogram_three_dics
     out.write("\n\n")
+
 
 
 # choose bins and save info in bin_dics
@@ -319,25 +399,6 @@ def get_standard_bin_info(distance):
     return bin_dic
 
 
-# generate count for each bin
-def get_histogram_dic(data_dic, bin_count):
-    histogram_dic = OrderedDict()
-    keys = data_dic.keys()
-    values = data_dic.values()
-    high_index = 0
-    for bin in bin_count.get_bins():
-        low, high = bin
-        low_index = keys.index(low) if low in keys else high_index + 1
-        if high not in keys:
-            high = find_index(high, keys, True)
-        high_index = keys.index(high)
-        count_list = values[low_index:high_index+1]
-        key = list_to_str(bin)
-        histogram_dic[key] = helper.combine(count_list, CLASSES)
-        #print "{0} {1}\n".format(key, histogram_dic[key])
-    return histogram_dic
-
-
 def find_index(element, l, low):
     step = -1 if low else 1
     while (1):
@@ -354,7 +415,8 @@ def list_to_str(l):
     return '-'.join(l)
 
 
-def write_dic(dic, out):
+
+def write_dic1(dic, out):
     for key in dic.keys():
         out.write("{0} {1}\n".format(key, dic[key]))
     out.write('\n')
