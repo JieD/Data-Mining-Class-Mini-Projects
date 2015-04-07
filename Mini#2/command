@@ -1,3 +1,6 @@
 cat in_data/adult.data.csv in_data/adult.test.csv > in_data/adult.all.csv
 mkdir out_data
 python visualize.py
+python remove_missing_values.py in_data/adult.all.csv in_data/adult.all1.csv
+python remove_missing_values1.py in_data/adult.all.csv in_data/adult.all2.csv
+python test.py
