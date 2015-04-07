@@ -5,17 +5,14 @@ File_Size = 0
 
 
 def main():
-    if len(sys.argv) is not 5:
-        print 'incorrect arguments\nneed: input_file1.txt input_file2.txt out_file1.txt out_file1.txt'
+    if len(sys.argv) is not 3:
+        print 'incorrect arguments\nneed: input_file.txt out_file.txt'
         sys.exit(2)
     else:
         argv1 = sys.argv[1]
         argv2 = sys.argv[2]
-        argv3 = sys.argv[3]
-        argv4 = sys.argv[4]
 
-    remove_missing_value(argv1, argv3)
-    remove_missing_value(argv2, argv4)
+    remove_missing_value(argv1, argv2)
     print "file size is: {0}".format(File_Size)
 
 
