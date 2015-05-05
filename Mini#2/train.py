@@ -4,7 +4,6 @@ import operator
 import math
 from collections import Counter, OrderedDict
 
-
 # declare global variables
 file_size = 0
 dics = {}
@@ -17,6 +16,7 @@ continuous_dics = []
 
 histogram_dics = []
 bin_dics = []
+# Test on different bin numbers
 Selected_Bin_Nums = [20, 30, 4, 20, 20, 10]
 Selected_Bin_Nums1 = [10, 5, 4, 5, 5, 10]
 Selected_Bin_Nums2 = [20, 30, 4, 80, 60, 10]
@@ -43,7 +43,7 @@ def main():
         print "{0}: {1}".format(label, Label_Count[label])
     write_categorical_count(categorical_file)
     write_continuous_data(continuous_file)
-    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums)
+    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums2)
     train_gaussian()
     test(test_file, bin)
 
@@ -64,7 +64,7 @@ def train(file, bin):
         print "{0}: {1}".format(label, Label_Count[label])
     write_categorical_count(categorical_file)
     write_continuous_data(continuous_file)
-    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums)
+    write_histogram_data(histogram_file, histogram_file_visual, Selected_Bin_Nums2)
     train_gaussian()
 
 

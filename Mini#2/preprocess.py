@@ -16,7 +16,7 @@ def remove_missing_value():
 
     target_indexes = Replace_dic.keys()
 
-    while (1):
+    while 1:
         line = in_f.readline()
         if line == '':  #EOF
             in_f.close()
