@@ -1,6 +1,7 @@
 from math import log
 
 
+# count the size of a cluster
 def get_cluster_count(data, index):
     num_class = len(data)
     count = 0
@@ -9,6 +10,44 @@ def get_cluster_count(data, index):
     return count
 
 
+# get a list of cluster counts
+def get_all_cluster_counts(data):
+    counts = []
+    num_cluster = len(data[0])
+    num_class = len(data)
+    for i in range(0, num_cluster):
+        counts.append(get_cluster_count(data, i))
+    return counts
+
+
+# count the size of each class
+def get_class_count(data, index):
+    num_cluster = len(data[0])
+    count = 0
+    for i in range(0, num_cluster):
+        count += data[index][i]
+    return count
+
+
+# get a list of class counts
+def get_all_class_counts(data):
+    counts = []
+    num_class = len(data)
+    num_cluster = len(data[0])
+    for i in range(0, num_class):
+        counts.append(get_class_count(data, i))
+    return counts
+
+
+# total value in the list
+def get_all_counts(count_list):
+    total = 0.0
+    for i in range(0, len(count_list)):
+        total += count_list[i]
+    return total
+
+
+# compute n chooses 2
 def get_combination_two(n):
     return n * (n - 1) / 2.0
 
@@ -17,27 +56,32 @@ def get_combination_two(n):
 def nmi(data):
     num_class = len(data)
     num_cluster = len(data[0])
-    c = 50.0
-    N = 150.0
-    Hc = -3.0 * (50 / N) * log(50 / N, 2)
+    class_counts = get_all_class_counts(data)
+    cluster_counts = get_all_cluster_counts(data)
+    N = get_all_counts(class_counts)
+    #print "N: {0}".format(N)
+
+    Hc = 0.0
+    for j in range(0, num_class):
+        c = class_counts[j]
+        Hc -= (c / N) * log(c / N, 2)
     #print "Hc: {0}".format(Hc)
 
     Hw = 0.0
+    I = 0.0
     for k in range(0, num_cluster):
-        w = get_cluster_count(data, k)
-        h = (w / N) * log(w / N, 2)
-        Hw -= h
-        #print "h: {0}, Hw: {1}".format(h, Hw)
+        w = cluster_counts[k]
+        Hw -= (w / N) * log(w / N, 2)
 
-        I = 0.0
         for j in range(0, num_class):
             i = 0.0
             wc = data[j][k]
             if wc > 0:
-                i = (wc / N) * log(N * wc / (c * w), 2)
+                i = (wc / N) * log(N * wc / (class_counts[j] * w), 2)
                 I += i
-            #print "wc: {0}, i: {1}".format(wc, i)
-        #print "I: {0}\n".format(I)
+                #print "wc: {0}, i: {1}".format(wc, i)
+    #print "Hw: {0}".format(Hw)
+    #print "I: {0}".format(I)
 
     return I * 2 / (Hw + Hc)
 
@@ -103,12 +147,14 @@ def f_measure(TP, FP, FN):
 def main():
     kmeans =  [[0, 50, 0], [47, 0, 3],  [14, 0, 36]]
     xmeans =  [[0, 0, 50], [10, 40, 0], [42, 8, 0]]
-    density = [[0, 0, 50], [10, 40, 0], [45, 5, 0]]
-    data = [kmeans, xmeans, density]
-    #test = [[5, 1, 2], [1, 4, 0], [0, 1, 3]]
+    dbscan = [[47, 0, 0], [0, 4, 38], [0, 35, 0]]
+    data = [kmeans, xmeans, dbscan]
+
+    test = [[5, 1, 2], [1, 4, 0], [0, 1, 3]]
+    #print "nmi: {0}".format(nmi(test))
     #rand_index(test)
     for element in data:
-        print nmi(element)
+        print "nmi: {0}".format(nmi(element))
         rand_index(element)
         print
 

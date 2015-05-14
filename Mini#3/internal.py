@@ -18,20 +18,20 @@ def import_data(file_name, data):
         words = line.strip().split(',')[1:]  # skip the first attribute (index)
         cluster = words.pop()  # the last attribute is the cluster
         #print words, cluster
-        length = len(words)
-        for i in range(0, length - 1):  # skip the last attribute (class label)
-            value.append(float(words[i]))
-        #print value
-        data[cluster].append(value)
+        if cluster is not '?':
+            length = len(words)
+            for i in range(0, length - 1):  # skip the last attribute (class label)
+                value.append(float(words[i]))
+            #print value
+            data[cluster].append(value)
 
 
-# calculate the radius of each cluster in the data
+# calculate the diameters of each cluster in the data
 def get_diameter(data):
     clusters = data.keys()
     for cluster in clusters:
         points = data[cluster]
         size = len(points)
-
 
         pairs = itertools.permutations(points, 2)  # get all possible combinations
         total_distance = 0.0
@@ -39,7 +39,7 @@ def get_diameter(data):
             distance = compute_distance(pair[0], pair[1])
             total_distance += (distance * distance)
             #print pair, distance
-        diameter = total_distance / (size * (size - 1))
+        diameter = math.sqrt(total_distance / (size * (size - 1)))
         print "{0} size: {1}, diameter: {2}".format(cluster, size, diameter)
 
 
@@ -76,12 +76,21 @@ def compute_distance(point1, point2):
 
 
 def main():
-    data = {'cluster0': [], 'cluster1': [], 'cluster2': []}
-    import_data('Statistics/iris/kmean_result.arff', data)
-    #print data['cluster1']
-    get_diameter(data)
-    #print compute_distance([0, 0], [1, 3])
-    compute_link(data)
+    kmeans = {'cluster0': [], 'cluster1': [], 'cluster2': []}
+    import_data('Statistics/iris/kmean_result.arff', kmeans)
+    xmeans = {'cluster0': [], 'cluster1': [], 'cluster2': []}
+    import_data('Statistics/iris/xmean_result.arff', xmeans)
+    dbscan = {'cluster0': [], 'cluster1': [], 'cluster2': []}
+    import_data('Statistics/iris/dbscan_result.arff', dbscan)
+    datasets = {'kmeans': kmeans, 'xmeans': xmeans, 'dbscan': dbscan}
+
+    algorithms = datasets.keys()
+    for algorithm in algorithms:
+        print algorithm
+        data = datasets[algorithm]
+        get_diameter(data)
+        compute_link(data)
+        print
 
 
 if __name__ == "__main__":
