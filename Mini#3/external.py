@@ -147,16 +147,21 @@ def f_measure(TP, FP, FN):
 def main():
     kmeans =  [[0, 50, 0], [47, 0, 3],  [14, 0, 36]]
     xmeans =  [[0, 0, 50], [10, 40, 0], [42, 8, 0]]
-    dbscan = [[47, 0, 0], [0, 4, 38], [0, 35, 0]]
-    data = [kmeans, xmeans, dbscan]
+    dbscan_default = [[50, 50, 50]]
+    dbscan_best = [[47, 0, 0], [0, 4, 38], [0, 35, 0]]
+    data = {'kmeans': kmeans, 'xmeans': xmeans, 'dbscan_default': dbscan_default, 'dbscan_best': dbscan_best}
 
-    test = [[5, 1, 2], [1, 4, 0], [0, 1, 3]]
-    #print "nmi: {0}".format(nmi(test))
-    #rand_index(test)
-    for element in data:
+    algorithms = data.keys()
+    for algorithm in algorithms:
+        element = data[algorithm]
+        print algorithm
         print "nmi: {0}".format(nmi(element))
         rand_index(element)
         print
+
+    #test = [[5, 1, 2], [1, 4, 0], [0, 1, 3]]
+    #print "nmi: {0}".format(nmi(test))
+    #rand_index(test)
 
 
 if __name__ == "__main__":
