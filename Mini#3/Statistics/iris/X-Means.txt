@@ -1,0 +1,66 @@
+=== Run information ===
+
+Scheme:weka.clusterers.XMeans -I 1 -M 1000 -J 1000 -L 3 -H 3 -B 1.0 -C 0.5 -D "weka.core.EuclideanDistance -R first-last" -S 10
+Relation:     iris.data.txt
+Instances:    150
+Attributes:   5
+              sepal length
+              sepal width
+              petal length
+              petal width
+Ignored:
+              class
+Test mode:Classes to clusters evaluation on training data 
+=== Model and evaluation on training set ===
+
+
+XMeans
+======
+Requested iterations            : 1
+Iterations performed            : 1
+Splits prepared                 : 3
+Splits performed                : 0
+Cutoff factor                   : 0.5
+Percentage of splits accepted 
+by cutoff factor                : 0 %
+------
+Cutoff factor                   : 0.5
+------
+
+Cluster centers                 : 3 centers
+
+Cluster 0
+            6.703846153846151 3.063461538461538 5.467307692307691 1.9769230769230763
+Cluster 1
+            5.783333333333334 2.664583333333333 4.297916666666667 1.3499999999999999
+Cluster 2
+            5.005999999999999 3.4180000000000006 1.464 0.2439999999999999
+
+Distortion: 29.490707
+BIC-Value : 65.872276
+
+
+Time taken to build model (full training data) : 0.01 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       52 ( 35%)
+1       48 ( 32%)
+2       50 ( 33%)
+
+
+Class attribute: class
+Classes to Clusters:
+
+  0  1  2  <-- assigned to cluster
+  0  0 50 | Iris-setosa
+ 10 40  0 | Iris-versicolor
+ 42  8  0 | Iris-virginica
+
+Cluster 0 <-- Iris-virginica
+Cluster 1 <-- Iris-versicolor
+Cluster 2 <-- Iris-setosa
+
+Incorrectly clustered instances :	18.0	 12      %

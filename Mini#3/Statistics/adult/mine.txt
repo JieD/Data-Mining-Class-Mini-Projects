@@ -1,0 +1,12 @@
+Equal Bin
+Gaussian
+Missing Value Reserved
+[78.8, 0.22]
+[83.5, 0.15]
+Missing Value Replaced with Mode
+[78.9, 0.22]
+[83.4, 0.16]
+Missing Value Removed
+[78.7, 0.21]
+[82.9, 0.14]
+

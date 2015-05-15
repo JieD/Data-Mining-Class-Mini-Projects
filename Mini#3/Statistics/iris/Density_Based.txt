@@ -1,0 +1,108 @@
+=== Run information ===
+
+Scheme:weka.clusterers.MakeDensityBasedClusterer -M 1.0E-6 -W weka.clusterers.XMeans -- -I 1 -M 1000 -J 1000 -L 3 -H 3 -B 1.0 -C 0.5 -D "weka.core.EuclideanDistance -R first-last" -S 10
+Relation:     iris.data.txt
+Instances:    150
+Attributes:   5
+              sepal length
+              sepal width
+              petal length
+              petal width
+Ignored:
+              class
+Test mode:Classes to clusters evaluation on training data 
+=== Model and evaluation on training set ===
+
+MakeDensityBasedClusterer: 
+
+Wrapped clusterer: 
+XMeans
+======
+Requested iterations            : 1
+Iterations performed            : 1
+Splits prepared                 : 3
+Splits performed                : 0
+Cutoff factor                   : 0.5
+Percentage of splits accepted 
+by cutoff factor                : 0 %
+------
+Cutoff factor                   : 0.5
+------
+
+Cluster centers                 : 3 centers
+
+Cluster 0
+            6.703846153846151 3.063461538461538 5.467307692307691 1.9769230769230763
+Cluster 1
+            5.783333333333334 2.664583333333333 4.297916666666667 1.3499999999999999
+Cluster 2
+            5.005999999999999 3.4180000000000006 1.464 0.2439999999999999
+
+Distortion: 29.490707
+BIC-Value : 65.872276
+
+Fitted estimators (with ML estimates of variance):
+
+Cluster: 0 Prior probability: 0.3464
+
+Attribute: sepal length
+Normal Distribution. Mean = 6.7038 StdDev = 0.5166
+Attribute: sepal width
+Normal Distribution. Mean = 3.0635 StdDev = 0.2703
+Attribute: petal length
+Normal Distribution. Mean = 5.4673 StdDev = 0.6104
+Attribute: petal width
+Normal Distribution. Mean = 1.9769 StdDev = 0.3105
+
+Cluster: 1 Prior probability: 0.3203
+
+Attribute: sepal length
+Normal Distribution. Mean = 5.7833 StdDev = 0.42
+Attribute: sepal width
+Normal Distribution. Mean = 2.6646 StdDev = 0.2578
+Attribute: petal length
+Normal Distribution. Mean = 4.2979 StdDev = 0.5395
+Attribute: petal width
+Normal Distribution. Mean = 1.35 StdDev = 0.2517
+
+Cluster: 2 Prior probability: 0.3333
+
+Attribute: sepal length
+Normal Distribution. Mean = 5.006 StdDev = 0.3489
+Attribute: sepal width
+Normal Distribution. Mean = 3.418 StdDev = 0.3772
+Attribute: petal length
+Normal Distribution. Mean = 1.464 StdDev = 0.1718
+Attribute: petal width
+Normal Distribution. Mean = 0.244 StdDev = 0.1061
+
+
+Time taken to build model (full training data) : 0.01 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       55 ( 37%)
+1       45 ( 30%)
+2       50 ( 33%)
+
+
+Log likelihood: -2.08578
+
+
+Class attribute: class
+Classes to Clusters:
+
+  0  1  2  <-- assigned to cluster
+  0  0 50 | Iris-setosa
+ 10 40  0 | Iris-versicolor
+ 45  5  0 | Iris-virginica
+
+Cluster 0 <-- Iris-virginica
+Cluster 1 <-- Iris-versicolor
+Cluster 2 <-- Iris-setosa
+
+Incorrectly clustered instances :	15.0	 10      %
+
+
