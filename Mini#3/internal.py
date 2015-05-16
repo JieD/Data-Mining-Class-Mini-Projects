@@ -17,8 +17,11 @@ def import_data(file_name, data):
         value = []
         words = line.strip().split(',')[1:]  # skip the first attribute (index)
         cluster = words.pop()  # the last attribute is the cluster
-        #print words, cluster
-        if cluster is not '?':
+
+        if cluster is not '?':  # dismiss outliers
+            # check if the cluster is new to the dictionary
+            if cluster not in data:
+                data[cluster] = []
             length = len(words)
             for i in range(0, length - 1):  # skip the last attribute (class label)
                 value.append(float(words[i]))
@@ -76,16 +79,16 @@ def compute_distance(point1, point2):
 
 
 def main():
-    kmeans = {'cluster0': [], 'cluster1': [], 'cluster2': []}
-    import_data('Statistics/iris/kmean_result.arff', kmeans)
-    xmeans = {'cluster0': [], 'cluster1': [], 'cluster2': []}
-    import_data('Statistics/iris/xmean_result.arff', xmeans)
-    dbscan = {'cluster0': [], 'cluster1': [], 'cluster2': []}
-    import_data('Statistics/iris/dbscan_result.arff', dbscan)
-    datasets = {'kmeans': kmeans, 'xmeans': xmeans, 'dbscan': dbscan}
+    files = {'kmeans': 'Statistics/iris/kmean_result.arff',
+             'xmeans': 'Statistics/iris/xmean_result.arff',
+             'dbscan_default': 'Statistics/iris/dbscan_default_result.arff',
+             'dbscan_best'   : 'Statistics/iris/dbscan_best_result.arff'}
+    datasets = {'kmeans': {}, 'xmeans': {}, 'dbscan_default': {}, 'dbscan_best': {}}
 
-    algorithms = datasets.keys()
-    for algorithm in algorithms:
+    for algorithm in datasets.keys():
+        data_file = files[algorithm]
+        import_data(data_file, datasets[algorithm])
+
         print algorithm
         data = datasets[algorithm]
         get_diameter(data)

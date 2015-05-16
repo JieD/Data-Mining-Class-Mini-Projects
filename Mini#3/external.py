@@ -128,15 +128,15 @@ def rand_index(data):
 
     ri = (TP + TN) / (TP_FP + TN_FN)
     #print "TP+FP: {0}".format(TP_FP)
-    #print "TP: {0}, FP: {1}".format(TP, FP)
+    print "TP: {0}, FP: {1}".format(TP, FP)
     #print "TN+FN: {0}".format(TN_FN)
-    #print "TN: {0}, FN: {1}".format(TN, FN)
+    print "TN: {0}, FN: {1}".format(TN, FN)
     print "ri: {0}".format(ri)
     f_measure(TP, FP, FN)
 
 
 def f_measure(TP, FP, FN):
-    BETA = 1
+    BETA = 2
     bs = BETA * BETA
     precision = TP / (TP + FP)
     recall = TP / (TP + FN)
@@ -147,7 +147,7 @@ def f_measure(TP, FP, FN):
 def main():
     kmeans =  [[0, 50, 0], [47, 0, 3],  [14, 0, 36]]
     xmeans =  [[0, 0, 50], [10, 40, 0], [42, 8, 0]]
-    dbscan_default = [[50, 50, 50]]
+    dbscan_default = [[50], [50], [50]]
     dbscan_best = [[47, 0, 0], [0, 4, 38], [0, 35, 0]]
     data = {'kmeans': kmeans, 'xmeans': xmeans, 'dbscan_default': dbscan_default, 'dbscan_best': dbscan_best}
 
